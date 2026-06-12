@@ -178,6 +178,10 @@ nav{
 
 /* ─── SLIDESHOW (inside hero) ── */
 .hero-slideshow{position:relative;z-index:1;width:100%;margin-top:40px;padding-bottom:48px}
+@media(max-width:640px){
+  .stats-section{order:3}
+  .hero-slideshow{order:2}
+}
 .slideshow-dots-row{
   display:flex;align-items:center;justify-content:center;gap:6px;
   margin-bottom:20px;
@@ -191,8 +195,8 @@ nav{
 
 .slide-card{
   flex-shrink:0;
-  width:260px;height:380px;
-  border-radius:18px;position:relative;overflow:hidden;
+  width:280px;height:420px;
+  border-radius:20px;position:relative;overflow:hidden;
   cursor:pointer;transition:transform .2s,box-shadow .3s;
   border:1px solid rgba(255,255,255,.06);
 }
@@ -201,20 +205,20 @@ nav{
 .sc-scrim{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.04) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,.6) 65%,rgba(0,0,0,.95) 100%)}
 .sc-body{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center}
 .sc-photo{
-  margin:20px auto 0;width:130px;height:130px;border-radius:50%;
+  margin:32px auto 0;width:195px;height:195px;border-radius:50%;
   background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;
   font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;
   color:rgba(255,255,255,.5);position:relative;overflow:hidden;flex-shrink:0;
 }
 .sc-photo img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
-.sc-ring{position:absolute;inset:-4px;border-radius:50%;border:2.5px solid var(--sca,#f5c518);box-shadow:0 0 18px color-mix(in srgb,var(--sca,#f5c518) 45%,transparent)}
-.sc-info{position:absolute;bottom:0;left:0;right:0;padding:0 14px 14px;text-align:center}
-.sc-fn{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.25rem;line-height:1;text-transform:uppercase;color:#fff;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.7)}
-.sc-sn{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.25rem;line-height:1;text-transform:uppercase;color:#fff;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.7);margin-bottom:3px}
-.sc-handle{font-family:'Barlow Condensed',sans-serif;font-size:.6rem;font-weight:600;color:var(--sca,#f5c518);letter-spacing:.05em;margin-bottom:6px}
-.sc-wc{font-size:.46rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:4px}
-.sc-badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:.42rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--sca,#f5c518);border-radius:12px;color:var(--sca,#f5c518);margin-bottom:5px}
-.sc-country{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-style:italic;font-size:1.1rem;text-transform:uppercase;color:var(--sca,#f5c518);letter-spacing:.04em;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.sc-ring{position:absolute;inset:-5px;border-radius:50%;border:3px solid var(--sca,#f5c518);box-shadow:0 0 28px color-mix(in srgb,var(--sca,#f5c518) 55%,transparent)}
+.sc-info{position:absolute;bottom:0;left:0;right:0;padding:0 18px 18px;text-align:center}
+.sc-fn{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.7rem;line-height:1;text-transform:uppercase;color:#fff;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.7)}
+.sc-sn{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.7rem;line-height:1;text-transform:uppercase;color:#fff;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.7);margin-bottom:3px}
+.sc-handle{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;font-weight:600;color:var(--sca,#f5c518);letter-spacing:.05em;margin-bottom:8px}
+.sc-wc{font-size:.52rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:4px}
+.sc-badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:.48rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:2px 9px;border:1px solid var(--sca,#f5c518);border-radius:12px;color:var(--sca,#f5c518);margin-bottom:6px}
+.sc-country{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-style:italic;font-size:1.3rem;text-transform:uppercase;color:var(--sca,#f5c518);letter-spacing:.04em;text-shadow:0 2px 12px rgba(0,0,0,.6)}
 
 /* ─── STATS ── */
 .stats-section{
@@ -428,7 +432,7 @@ footer{padding:36px 28px;display:flex;align-items:center;justify-content:space-b
 .upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;z-index:1}
 .upload-icon{font-size:1.8rem;margin-bottom:8px}
 .upload-hint{font-size:.85rem;color:var(--muted)}
-#uploadContent{width:100%;height:100%;position:relative}
+#uploadContent{width:100%;height:100%;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .upload-preview-img{width:100%;height:100%;object-fit:cover;display:block;border-radius:calc(var(--r) - 1px);position:absolute;inset:0}
 .upload-btn-row{display:flex;gap:8px;padding:10px;justify-content:center;position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));border-radius:0 0 calc(var(--r) - 1px) calc(var(--r) - 1px);z-index:2}
 .upload-change-btn,.upload-remove-btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.05em;text-transform:uppercase;padding:7px 18px;border-radius:6px;border:none;cursor:pointer;transition:opacity .15s;position:relative;z-index:2}
@@ -447,21 +451,35 @@ footer{padding:36px 28px;display:flex;align-items:center;justify-content:space-b
 .card-bg{position:absolute;inset:0;background-size:cover;background-position:center}
 .card-scrim{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.06) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,.55) 65%,rgba(0,0,0,.93) 100%)}
 .card-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center}
-.card-photo-area{margin-top:16px;position:relative;width:195px;height:195px}
-.card-ring{position:absolute;inset:-5px;border-radius:50%;border:3px solid var(--ca,#f5c518);box-shadow:0 0 28px color-mix(in srgb,var(--ca,#f5c518) 55%,transparent)}
+.card-photo-area{margin-top:32px;position:relative;width:195px;height:195px}
+.card-ring{display:none}
 .card-photo-img{width:195px;height:195px;border-radius:50%;object-fit:cover;display:block}
 .card-photo-ph{width:195px;height:195px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:4rem;color:rgba(255,255,255,.25)}
 .card-info{position:absolute;bottom:0;left:0;right:0;padding:0 18px 18px;text-align:center}
-.card-fn{font-weight:800;font-size:1.55rem;line-height:1;text-transform:uppercase;color:#fff;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.7)}
-.card-sn{font-weight:800;font-size:1.55rem;line-height:1;text-transform:uppercase;color:#fff;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.7);margin-bottom:3px}
+.card-fn{font-weight:800;font-size:1.7rem;line-height:1;text-transform:uppercase;color:#fff;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.7)}
+.card-sn{font-weight:800;font-size:1.7rem;line-height:1;text-transform:uppercase;color:#fff;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.7);margin-bottom:3px}
 .card-handle{font-weight:600;font-size:.75rem;color:var(--ca,#f5c518);letter-spacing:.05em;margin-bottom:8px;display:none}
 .card-wc{font-size:.52rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:4px}
-.card-badge-pill{display:inline-block;font-size:.48rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:2px 9px;border:1px solid var(--ca,#f5c518);border-radius:12px;color:var(--ca,#f5c518);margin-bottom:6px}
+.card-badge-pill{display:block;width:fit-content;margin:0 auto 6px;font-size:.48rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:2px 9px;border:1px solid var(--ca,#f5c518);border-radius:12px;color:var(--ca,#f5c518)}
 .card-country{font-weight:800;font-style:italic;font-size:1.3rem;text-transform:uppercase;color:var(--ca,#f5c518);letter-spacing:.04em;text-shadow:0 2px 12px rgba(0,0,0,.6)}
 .card-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:rgba(255,255,255,.18);text-align:center;padding:24px}
 .card-empty .e-icon{font-size:2.5rem}
 .card-empty p{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;line-height:1.5}
 .card-actions{display:flex;gap:10px;width:280px}
+@media(min-width:600px){
+  #idCard{width:380px;height:570px;border-radius:26px}
+  .card-photo-area{margin-top:44px;width:264px;height:264px}
+  .card-photo-img{width:264px;height:264px}
+  .card-photo-ph{width:264px;height:264px;font-size:5rem}
+  .card-info{padding:0 24px 24px}
+  .card-fn,.card-sn{font-size:2.1rem}
+  .card-handle{font-size:.9rem;margin-bottom:10px}
+  .card-wc{font-size:.62rem;letter-spacing:.28em;margin-bottom:5px}
+  .card-badge-pill{font-size:.58rem;padding:3px 12px;margin-bottom:8px}
+  .card-country{font-size:1.65rem}
+  .card-actions{width:380px}
+  .card-empty .e-icon{font-size:3.2rem}
+}
 .btn-dl,.btn-sh{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;border-radius:10px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none}
 .btn-dl{background:var(--accent);color:#000;transition:background .4s,opacity .2s}
 .btn-dl:hover{opacity:.88}
@@ -682,9 +700,19 @@ footer{padding:36px 28px;display:flex;align-items:center;justify-content:space-b
 <script>
 // ── BACKGROUNDS ───────────────────────────────────────────────────────────────
 const BGRND = {
-  ghana:  'backgrounds/Ghana.webp',
-  norway: 'backgrounds/Norway.webp',
-  france: 'backgrounds/France.webp',
+  ghana:       'backgrounds/Ghana.webp',
+  norway:      'backgrounds/Norway.webp',
+  france:      'backgrounds/France.webp',
+  brazil:      'backgrounds/Brasil.webp',
+  argentina:   'backgrounds/Argentina.webp',
+  croatia:     'backgrounds/Croatia.webp',
+  england:     'backgrounds/England.webp',
+  germany:     'backgrounds/Germany.webp',
+  portugal:    'backgrounds/Portugal.webp',
+  senegal:     'backgrounds/Senegal.webp',
+  south_korea: 'backgrounds/South Korea.webp',
+  spain:       'backgrounds/Spain.webp',
+  usa:         'backgrounds/Usa.webp',
 };
 
 // All 48 FIFA World Cup 2026 teams
@@ -856,21 +884,21 @@ loadMatches();
 
 // ── SLIDESHOW ─────────────────────────────────────────────────────────────────
 const SLIDES=[
-  {key:'ghana',      name:'Kofi',      sn:'Mensah',    handle:'@kofi_gh',     bg:BGRND.ghana,  photo:'backgrounds/images/fan1.webp'},
-  {key:'france',     name:'Théo',      sn:'Dubois',    handle:'@theo_fra',    bg:BGRND.france, photo:'backgrounds/images/fan2.webp'},
-  {key:'norway',     name:'Magnus',    sn:'Eriksen',   handle:'@magnus_nor',  bg:BGRND.norway, photo:'backgrounds/images/fan3.webp'},
-  {key:'brazil',     name:'Lucas',     sn:'Santos',    handle:'@lucassantos',                  photo:'backgrounds/images/fan4.webp'},
-  {key:'netherlands',name:'Sven',      sn:'de Jong',   handle:'@sven_nld',                     photo:'backgrounds/images/fan1.webp'},
-  {key:'argentina',  name:'Matías',    sn:'Romero',    handle:'@matiasrmr',                    photo:'backgrounds/images/fan2.webp'},
-  {key:'morocco',    name:'Youssef',   sn:'Amrabat',   handle:'@youssef_mar',                  photo:'backgrounds/images/fan3.webp'},
-  {key:'usa',        name:'Tyler',     sn:'Jackson',   handle:'@tylerjackson',                 photo:'backgrounds/images/fan4.webp'},
-  {key:'spain',      name:'Diego',     sn:'García',    handle:'@diegogarcia',                  photo:'backgrounds/images/fan1.webp'},
-  {key:'germany',    name:'Lukas',     sn:'Müller',    handle:'@lukas_ger',                    photo:'backgrounds/images/fan2.webp'},
-  {key:'japan',      name:'Haruto',    sn:'Tanaka',    handle:'@haruto_jpn',                   photo:'backgrounds/images/fan3.webp'},
-  {key:'mexico',     name:'Alejandro', sn:'Reyes',     handle:'@alexreyes',                    photo:'backgrounds/images/fan4.webp'},
-  {key:'south_korea',name:'Junho',     sn:'Park',      handle:'@junho_kor',                    photo:'backgrounds/images/fan1.webp'},
-  {key:'portugal',   name:'Rui',       sn:'Carvalho',  handle:'@rui_por',                      photo:'backgrounds/images/fan2.webp'},
-  {key:'senegal',    name:'Ibrahima',  sn:'Diallo',    handle:'@ibra_sen',                     photo:'backgrounds/images/fan3.webp'},
+  {key:'ghana',      name:'Kofi',      sn:'Mensah',    handle:'@kofi_gh',     bg:BGRND.ghana,       photo:'backgrounds/images/fan1.webp'},
+  {key:'france',     name:'Théo',      sn:'Dubois',    handle:'@theo_fra',    bg:BGRND.france,      photo:'backgrounds/images/fan2.webp'},
+  {key:'norway',     name:'Magnus',    sn:'Eriksen',   handle:'@magnus_nor',  bg:BGRND.norway,      photo:'backgrounds/images/fan3.webp'},
+  {key:'brazil',     name:'Lucas',     sn:'Santos',    handle:'@lucassantos', bg:BGRND.brazil,      photo:'backgrounds/images/fan4.webp'},
+  {key:'argentina',  name:'Matías',    sn:'Romero',    handle:'@matiasrmr',   bg:BGRND.argentina,   photo:'backgrounds/images/fan1.webp'},
+  {key:'england',    name:'James',     sn:'Walker',    handle:'@james_eng',   bg:BGRND.england,     photo:'backgrounds/images/fan2.webp'},
+  {key:'germany',    name:'Lukas',     sn:'Müller',    handle:'@lukas_ger',   bg:BGRND.germany,     photo:'backgrounds/images/fan3.webp'},
+  {key:'spain',      name:'Diego',     sn:'García',    handle:'@diegogarcia', bg:BGRND.spain,       photo:'backgrounds/images/fan4.webp'},
+  {key:'croatia',    name:'Ivan',      sn:'Kovač',     handle:'@ivan_cro',    bg:BGRND.croatia,     photo:'backgrounds/images/fan1.webp'},
+  {key:'portugal',   name:'Rui',       sn:'Carvalho',  handle:'@rui_por',     bg:BGRND.portugal,    photo:'backgrounds/images/fan2.webp'},
+  {key:'usa',        name:'Tyler',     sn:'Jackson',   handle:'@tylerjackson',bg:BGRND.usa,         photo:'backgrounds/images/fan3.webp'},
+  {key:'senegal',    name:'Ibrahima',  sn:'Diallo',    handle:'@ibra_sen',    bg:BGRND.senegal,     photo:'backgrounds/images/fan4.webp'},
+  {key:'south_korea',name:'Junho',     sn:'Park',      handle:'@junho_kor',   bg:BGRND.south_korea, photo:'backgrounds/images/fan1.webp'},
+  {key:'morocco',    name:'Youssef',   sn:'Amrabat',   handle:'@youssef_mar',                       photo:'backgrounds/images/fan2.webp'},
+  {key:'netherlands',name:'Sven',      sn:'de Jong',   handle:'@sven_nld',                          photo:'backgrounds/images/fan3.webp'},
 ];
 let slideIdx=0,slideTimer;
 
@@ -910,7 +938,7 @@ function buildSlideshow(){
 
 function goSlide(idx){
   slideIdx=idx;
-  const cardW=220+14;
+  const cardW=280+16;
   const track=document.getElementById('cardsTrack');
   const vw=track.parentElement.offsetWidth;
   const visible=Math.floor(vw/cardW);
@@ -921,6 +949,22 @@ function goSlide(idx){
 function autoSlide(){slideIdx=(slideIdx+1)%SLIDES.length;goSlide(slideIdx);}
 buildSlideshow();
 slideTimer=setInterval(autoSlide,3200);
+
+// Touch swipe on slideshow
+(()=>{
+  const vp=document.querySelector('.cards-viewport');
+  let x0=0;
+  vp.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;},{passive:true});
+  vp.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-x0;
+    if(Math.abs(dx)>45){
+      clearInterval(slideTimer);
+      if(dx<0)goSlide(Math.min(slideIdx+1,SLIDES.length-1));
+      else goSlide(Math.max(slideIdx-1,0));
+      slideTimer=setInterval(autoSlide,3200);
+    }
+  },{passive:true});
+})();
 
 // ── OVERLAY (matches Mexican project pattern exactly) ─────────────────────────
 const genOverlay = document.getElementById('genOverlay');
@@ -1045,6 +1089,9 @@ function renderCard(){
   const accent=getAccent(selKey);
   card.style.setProperty('--ca',accent);
   card.style.boxShadow=`0 0 0 1px rgba(255,255,255,.06),0 24px 60px rgba(0,0,0,.8),0 0 40px rgba(${hexRgb(accent)},.15)`;
+  const ringStyle=`0 0 0 4px ${accent}, 0 0 28px rgba(${hexRgb(accent)},.6)`;
+  document.getElementById('cardPhotoImg').style.boxShadow=ringStyle;
+  document.getElementById('cardPhotoPh').style.boxShadow=ringStyle;
   if(BGRND[selKey]){bg.style.backgroundImage=`url(${BGRND[selKey]})`;bg.style.backgroundSize='cover';}
   else{const c=data.colors;bg.style.backgroundImage=`linear-gradient(155deg,${c.primary} 0%,${darken(c.primary,55)} 45%,#080808 100%)`;}
 
@@ -1068,42 +1115,131 @@ function renderCard(){
 }
 
 // ── CAPTURE ───────────────────────────────────────────────────────────────────
-async function capture(scale=3){
+async function captureCard(scale=6){
   const card=document.getElementById('idCard');
-  return await html2canvas(card,{scale,useCORS:true,allowTaint:true,backgroundColor:null,logging:false,scrollX:0,scrollY:0,x:0,y:0,width:card.offsetWidth,height:card.offsetHeight});
+  const accent=getAccent(selKey);
+  const rgb=hexRgb(accent);
+  const clone=card.cloneNode(true);
+  clone.style.cssText=`position:fixed;top:0;left:0;z-index:-9999;width:${card.offsetWidth}px;height:${card.offsetHeight}px;margin:0;pointer-events:none;border-radius:${card.style.borderRadius||'20px'}`;
+  // html2canvas doesn't resolve CSS custom properties reliably — inline all accent styles
+  clone.style.setProperty('--ca',accent);
+  const ringStyle=`0 0 0 4px ${accent}, 0 0 28px rgba(${rgb},.6)`;
+  clone.querySelectorAll('.card-country').forEach(el=>el.style.color=accent);
+  clone.querySelectorAll('.card-badge-pill').forEach(el=>{el.style.color=accent;el.style.borderColor=accent;});
+  clone.querySelectorAll('.card-handle').forEach(el=>el.style.color=accent);
+  clone.querySelectorAll('.card-photo-img,.card-photo-ph').forEach(el=>el.style.boxShadow=ringStyle);
+  document.body.appendChild(clone);
+  try{
+    return await html2canvas(clone,{scale,useCORS:true,allowTaint:true,backgroundColor:null,logging:false,scrollX:0,scrollY:0});
+  }finally{
+    document.body.removeChild(clone);
+  }
+}
+
+// Build 1080×1920 story canvas — card centered on dark background
+async function buildStoryCanvas(cardCanvas){
+  const W=1080,H=1920;
+  const out=document.createElement('canvas');
+  out.width=W;out.height=H;
+  const ctx=out.getContext('2d');
+
+  // Dark background
+  ctx.fillStyle='#080808';
+  ctx.fillRect(0,0,W,H);
+
+  // Subtle vignette
+  const vg=ctx.createRadialGradient(W/2,H/2,H*0.3,W/2,H/2,H*0.85);
+  vg.addColorStop(0,'transparent');
+  vg.addColorStop(1,'rgba(0,0,0,0.4)');
+  ctx.fillStyle=vg;
+  ctx.fillRect(0,0,W,H);
+
+  // Scale card to fit 88% of story width
+  const maxW=W*0.88;
+  const scale=Math.min(maxW/cardCanvas.width,(H*0.78)/cardCanvas.height);
+  const dw=cardCanvas.width*scale;
+  const dh=cardCanvas.height*scale;
+  const dx=(W-dw)/2;
+  const dy=(H-dh)/2-60; // slightly above center
+
+  // Card drop shadow
+  ctx.shadowColor='rgba(0,0,0,0.6)';
+  ctx.shadowBlur=100;
+  ctx.shadowOffsetY=40;
+  ctx.drawImage(cardCanvas,dx,dy,dw,dh);
+  ctx.shadowColor='transparent';
+
+  // Watermark
+  ctx.fillStyle='rgba(255,255,255,0.22)';
+  ctx.font='600 32px Barlow Condensed, sans-serif';
+  ctx.textAlign='center';
+  ctx.letterSpacing='4px';
+  ctx.fillText('wc2026-fancard.vercel.app',W/2,H-72);
+
+  return out;
+}
+
+// Trigger file download from a canvas
+function downloadCanvas(canvas, filename){
+  canvas.toBlob(blob=>{
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.download=filename;
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+  },'image/png');
 }
 
 document.getElementById('btnDl').addEventListener('click',async()=>{
-  const b=document.getElementById('btnDl');b.textContent='Generating…';b.disabled=true;
+  const b=document.getElementById('btnDl');
+  const orig=b.innerHTML;b.textContent='Generating…';b.disabled=true;
   try{
-    const c=await capture(4);
-    c.toBlob(blob=>{
-      const url=URL.createObjectURL(blob);
-      const a=document.createElement('a');
-      a.href=url;a.download=`wc2026-${(COUNTRY_SURNAMES[selKey]?.country||'fancard').toLowerCase().replace(/[\s']/g,'-')}.png`;
-      document.body.appendChild(a);a.click();document.body.removeChild(a);
-      setTimeout(()=>URL.revokeObjectURL(url),1000);
-      b.innerHTML='⬇ Download';b.disabled=false;
-    },'image/png');
-  }catch(e){console.error(e);toast('Download failed — try again');b.innerHTML='⬇ Download';b.disabled=false;}
+    const cardCanvas=await captureCard(6);
+    const story=await buildStoryCanvas(cardCanvas);
+    const ctry=(COUNTRY_SURNAMES[selKey]?.country||'fancard').toLowerCase().replace(/[\s']/g,'-');
+    downloadCanvas(story,`wc2026-${ctry}.png`);
+  }catch(e){
+    console.error('Download error:',e);
+    toast('Download failed — try again');
+  }finally{
+    b.innerHTML=orig;b.disabled=false;
+  }
 });
 
 document.getElementById('btnSh').addEventListener('click',async()=>{
-  const b=document.getElementById('btnSh');b.textContent='Preparing…';b.disabled=true;
+  const b=document.getElementById('btnSh');
+  const orig=b.innerHTML;b.textContent='Preparing…';b.disabled=true;
   const ctry=COUNTRY_SURNAMES[selKey]?.country||'';
-  const txt=`I'm repping ${ctry} at the FIFA World Cup 2026! 🌍⚽ Get your fan card at https://wc2026-fancard.vercel.app`;
+  const shareText=`I'm repping ${ctry} at the FIFA World Cup 2026! 🌍⚽ Get your fan card👇\nhttps://wc2026-fancard.vercel.app`;
   try{
-    const c=await capture(3);
-    c.toBlob(async blob=>{
+    const cardCanvas=await captureCard(6);
+    const story=await buildStoryCanvas(cardCanvas);
+    story.toBlob(async blob=>{
+      const file=new File([blob],'wc2026-fancard.png',{type:'image/png'});
       try{
-        const file=new File([blob],'wc2026-fancard.png',{type:'image/png'});
-        if(navigator.share&&navigator.canShare({files:[file]}))await navigator.share({text:txt,files:[file]});
-        else if(navigator.share)await navigator.share({text:txt});
-        else{await navigator.clipboard.writeText(txt);toast('Link copied!');}
-      }catch(e){if(e.name!=='AbortError')toast('Share failed — try download');}
-      finally{b.innerHTML='↗ Share';b.disabled=false;}
+        if(navigator.canShare&&navigator.canShare({files:[file]})){
+          await navigator.share({files:[file],title:'WC2026 FanCard',text:shareText});
+        } else if(navigator.share){
+          await navigator.share({title:'WC2026 FanCard',text:shareText});
+        } else {
+          // Desktop fallback: download the story image
+          downloadCanvas(story,`wc2026-fancard.png`);
+          toast('Saved! Share it on social media 🌍');
+        }
+      }catch(e){
+        if(e.name!=='AbortError'){
+          // Share failed — fall back to download
+          downloadCanvas(story,`wc2026-fancard.png`);
+        }
+      }finally{
+        b.innerHTML=orig;b.disabled=false;
+      }
     },'image/png');
-  }catch(e){console.error(e);toast('Share failed — try download');b.innerHTML='↗ Share';b.disabled=false;}
+  }catch(e){
+    console.error('Share error:',e);
+    toast('Share failed — try download instead');
+    b.innerHTML=orig;b.disabled=false;
+  }
 });
 
 // ── TOAST ─────────────────────────────────────────────────────────────────────
