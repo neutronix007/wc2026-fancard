@@ -547,15 +547,6 @@ footer{padding:36px 28px;display:flex;align-items:center;justify-content:space-b
   </div>
 </section>
 
-<!-- FIXTURES -->
-<section class="fixtures-section">
-  <div class="fixtures-inner">
-    <div class="section-label">FIFA World Cup 2026</div>
-    <div class="section-title">Today's Fixtures</div>
-    <div class="fixtures-grid" id="fixturesGrid"></div>
-  </div>
-</section>
-
 <!-- HOW IT WORKS -->
 <section class="how-section">
   <div class="section-label">How It Works</div>
@@ -579,6 +570,15 @@ footer{padding:36px 28px;display:flex;align-items:center;justify-content:space-b
       <div class="step-name">Share & Rep</div>
       <p class="step-desc">Download your fan card in HD and share it everywhere. Let the world see which side you're on.</p>
     </div>
+  </div>
+</section>
+
+<!-- FIXTURES -->
+<section class="fixtures-section">
+  <div class="fixtures-inner">
+    <div class="section-label">FIFA World Cup 2026</div>
+    <div class="section-title">Today's Fixtures</div>
+    <div class="fixtures-grid" id="fixturesGrid"></div>
   </div>
 </section>
 
@@ -866,10 +866,14 @@ function buildFixtures(matches){
 
 async function loadMatches(){
   try{
-    const r=await fetch('/api/matches?endpoint=competitions/WC/matches&status=SCHEDULED,IN_PLAY,FINISHED');
+    const r=await fetch('/api/matches?status=SCHEDULED,IN_PLAY,FINISHED');
     if(!r.ok)throw new Error();
     const d=await r.json();
-    const mapped=(d.matches||[]).slice(0,8).map(m=>({
+    const today=new Date().toDateString();
+    const all=(d.matches||[]);
+    const todayMatches=all.filter(m=>new Date(m.utcDate).toDateString()===today);
+    const source=(todayMatches.length?todayMatches:all).slice(0,8);
+    const mapped=source.map(m=>({
       home:m.homeTeam?.shortName||m.homeTeam?.name||'',
       hcode:m.homeTeam?.tla||'???',
       away:m.awayTeam?.shortName||m.awayTeam?.name||'',
@@ -879,28 +883,29 @@ async function loadMatches(){
       time:m.utcDate?new Date(m.utcDate).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):'',
       venue:m.venue||'',
     }));
-    buildTicker(mapped); buildFixtures(mapped);
+    buildTicker(mapped.length?mapped:FALLBACK);
+    buildFixtures(mapped.length?mapped:FALLBACK);
   }catch{buildTicker(FALLBACK); buildFixtures(FALLBACK);}
 }
 loadMatches();
 
 // ── SLIDESHOW ─────────────────────────────────────────────────────────────────
 const SLIDES=[
-  {key:'ghana',      name:'Kofi',      sn:'Mensah',    handle:'@kofi_gh',     bg:BGRND.ghana,       photo:'backgrounds/images/fan1.webp'},
-  {key:'france',     name:'Théo',      sn:'Dubois',    handle:'@theo_fra',    bg:BGRND.france,      photo:'backgrounds/images/fan2.webp'},
-  {key:'norway',     name:'Magnus',    sn:'Eriksen',   handle:'@magnus_nor',  bg:BGRND.norway,      photo:'backgrounds/images/fan3.webp'},
-  {key:'brazil',     name:'Lucas',     sn:'Santos',    handle:'@lucassantos', bg:BGRND.brazil,      photo:'backgrounds/images/fan4.webp'},
-  {key:'argentina',  name:'Matías',    sn:'Romero',    handle:'@matiasrmr',   bg:BGRND.argentina,   photo:'backgrounds/images/fan1.webp'},
-  {key:'england',    name:'James',     sn:'Walker',    handle:'@james_eng',   bg:BGRND.england,     photo:'backgrounds/images/fan2.webp'},
-  {key:'germany',    name:'Lukas',     sn:'Müller',    handle:'@lukas_ger',   bg:BGRND.germany,     photo:'backgrounds/images/fan3.webp'},
-  {key:'spain',      name:'Diego',     sn:'García',    handle:'@diegogarcia', bg:BGRND.spain,       photo:'backgrounds/images/fan4.webp'},
-  {key:'croatia',    name:'Ivan',      sn:'Kovač',     handle:'@ivan_cro',    bg:BGRND.croatia,     photo:'backgrounds/images/fan1.webp'},
-  {key:'portugal',   name:'Rui',       sn:'Carvalho',  handle:'@rui_por',     bg:BGRND.portugal,    photo:'backgrounds/images/fan2.webp'},
-  {key:'usa',        name:'Tyler',     sn:'Jackson',   handle:'@tylerjackson',bg:BGRND.usa,         photo:'backgrounds/images/fan3.webp'},
-  {key:'senegal',    name:'Ibrahima',  sn:'Diallo',    handle:'@ibra_sen',    bg:BGRND.senegal,     photo:'backgrounds/images/fan4.webp'},
-  {key:'south_korea',name:'Junho',     sn:'Park',      handle:'@junho_kor',   bg:BGRND.south_korea, photo:'backgrounds/images/fan1.webp'},
-  {key:'morocco',    name:'Youssef',   sn:'Amrabat',   handle:'@youssef_mar', bg:BGRND.morocco,     photo:'backgrounds/images/fan2.webp'},
-  {key:'netherlands',name:'Sven',      sn:'de Jong',   handle:'@sven_nld',    bg:BGRND.netherlands, photo:'backgrounds/images/fan3.webp'},
+  {key:'ghana',      name:'Antoine',   sn:'Semenyo',   handle:'@semenyo_gh',  bg:BGRND.ghana,       photo:'backgrounds/images/semenyo.jpg'},
+  {key:'france',     name:'Kylian',    sn:'Mbappé',    handle:'@mbappe',      bg:BGRND.france,      photo:'backgrounds/images/Kylian Mbappe.png'},
+  {key:'norway',     name:'Erling',    sn:'Haaland',   handle:'@erling9',     bg:BGRND.norway,      photo:'backgrounds/images/haaland.jpg'},
+  {key:'brazil',     name:'Vinicius',  sn:'Jr.',       handle:'@vinijr',      bg:BGRND.brazil,      photo:'backgrounds/images/vinicius.jpg'},
+  {key:'argentina',  name:'Lionel',    sn:'Messi',     handle:'@leomessi',    bg:BGRND.argentina,   photo:'backgrounds/images/messi.webp'},
+  {key:'england',    name:'Jude',      sn:'Bellingham',handle:'@judebellingham',bg:BGRND.england,    photo:'backgrounds/images/jude bellingham.jpg'},
+  {key:'germany',    name:'Kai',       sn:'Havertz',   handle:'@kaihavertz',  bg:BGRND.germany,     photo:'backgrounds/images/Kai havertz.webp'},
+  {key:'spain',      name:'Lamine',    sn:'Yamal',     handle:'@lamineyamal', bg:BGRND.spain,       photo:'backgrounds/images/lamine yamal.jpg'},
+  {key:'croatia',    name:'Luka',      sn:'Modrić',    handle:'@lukamodric10',bg:BGRND.croatia,     photo:'backgrounds/images/modric.jpg'},
+  {key:'portugal',   name:'Cristiano', sn:'Ronaldo',   handle:'@cr7',         bg:BGRND.portugal,    photo:'backgrounds/images/christiano ronaldo.webp'},
+  {key:'usa',        name:'Christian', sn:'Pulisic',   handle:'@cpulisic10',  bg:BGRND.usa,         photo:'backgrounds/images/pulisic.webp'},
+  {key:'senegal',    name:'Sadio',     sn:'Mané',      handle:'@sadiomane',   bg:BGRND.senegal,     photo:'backgrounds/images/sadio mane.webp'},
+  {key:'south_korea',name:'Heung-Min', sn:'Son',       handle:'@hm_son',      bg:BGRND.south_korea, photo:'backgrounds/images/heung min son.jpg'},
+  {key:'morocco',    name:'Achraf',    sn:'Hakimi',    handle:'@achraf_hakimi',bg:BGRND.morocco,    photo:'backgrounds/images/Hakimi.webp'},
+  {key:'netherlands',name:'Virgil',    sn:'van Dijk',  handle:'@virgilvandijk',bg:BGRND.netherlands,photo:'backgrounds/images/van dyk.webp'},
 ];
 let slideIdx=0,slideTimer;
 
@@ -913,7 +918,7 @@ function buildSlideshow(){
     const cdata=COUNTRY_SURNAMES[d.key];
     const c=cdata?.colors;
     const bgStyle=d.bg
-      ?`background-image:url(${d.bg})`
+      ?`background-image:url('${d.bg}')`
       :`background-image:linear-gradient(155deg,${c?.primary||'#222'} 0%,${darken(c?.primary||'#222',55)} 45%,#080808 100%)`;
     const code=CODES[d.key]||'???';
     track.innerHTML+=`<div class="slide-card" style="--sca:${acc}">
@@ -1094,7 +1099,7 @@ function renderCard(){
   const ringStyle=`0 0 0 4px ${accent}, 0 0 28px rgba(${hexRgb(accent)},.6)`;
   document.getElementById('cardPhotoImg').style.boxShadow=ringStyle;
   document.getElementById('cardPhotoPh').style.boxShadow=ringStyle;
-  if(BGRND[selKey]){bg.style.backgroundImage=`url(${BGRND[selKey]})`;bg.style.backgroundSize='cover';}
+  if(BGRND[selKey]){bg.style.backgroundImage=`url("${BGRND[selKey]}")`;bg.style.backgroundSize='cover';}
   else{const c=data.colors;bg.style.backgroundImage=`linear-gradient(155deg,${c.primary} 0%,${darken(c.primary,55)} 45%,#080808 100%)`;}
 
   const fn=document.getElementById('fFN').value.trim()||'YOUR';
@@ -1122,22 +1127,28 @@ async function captureCard(scale=6){
   const accent=getAccent(selKey);
   const rgb=hexRgb(accent);
   const clone=card.cloneNode(true);
-  clone.style.cssText=`position:fixed;top:0;left:0;z-index:-9999;width:${card.offsetWidth}px;height:${card.offsetHeight}px;margin:0;pointer-events:none;border-radius:${card.style.borderRadius||'20px'}`;
-  // html2canvas doesn't resolve CSS custom properties reliably — inline all accent styles
+  clone.style.cssText=`position:fixed;top:0;left:0;z-index:-9999;width:${card.offsetWidth}px;height:${card.offsetHeight}px;margin:0;pointer-events:none;`;
   clone.style.setProperty('--ca',accent);
+
+  // Append first so media queries apply and offsetWidth/Height are accurate
+  document.body.appendChild(clone);
+
+  // Inline all accent-dependent styles (html2canvas doesn't resolve CSS vars reliably)
   const ringStyle=`0 0 0 4px ${accent}, 0 0 28px rgba(${rgb},.6)`;
   clone.querySelectorAll('.card-country').forEach(el=>el.style.color=accent);
   clone.querySelectorAll('.card-badge-pill').forEach(el=>{el.style.color=accent;el.style.borderColor=accent;});
   clone.querySelectorAll('.card-handle').forEach(el=>el.style.color=accent);
   clone.querySelectorAll('.card-photo-ph').forEach(el=>el.style.boxShadow=ringStyle);
-  // html2canvas doesn't support object-fit:cover on <img> — swap to background-image div
+
+  // html2canvas ignores object-fit:cover on <img> — replace with background-image div
+  // Read dimensions AFTER appending so media queries are active
   clone.querySelectorAll('.card-photo-img').forEach(img=>{
-    const w=img.offsetWidth||195, h=img.offsetHeight||195;
+    const w=img.offsetWidth, h=img.offsetHeight;
     const div=document.createElement('div');
-    div.style.cssText=`width:${w}px;height:${h}px;border-radius:50%;background:url(${img.src}) center/cover no-repeat;display:block;box-shadow:${ringStyle}`;
+    div.style.cssText=`width:${w}px;height:${h}px;border-radius:50%;background:url("${img.src}") center/cover no-repeat;display:block;box-shadow:${ringStyle}`;
     img.parentNode.replaceChild(div,img);
   });
-  document.body.appendChild(clone);
+
   try{
     return await html2canvas(clone,{scale,useCORS:true,allowTaint:true,backgroundColor:null,logging:false,scrollX:0,scrollY:0});
   }finally{
