@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WC2026 FanCard — Get Your Official FIFA World Cup 2026 Fan Card</title>
+<meta name="description" content="Generate your official FIFA World Cup 2026 fan card. Pick your country, upload your photo, and share your support with the world.">
+<meta property="og:title" content="WC2026 FanCard — Rep Your Nation">
+<meta property="og:description" content="Get your official FIFA World Cup 2026 fan card. 32 nations. Your photo. Your name. Share it everywhere.">
+<meta name="theme-color" content="#080808">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600;1,700;1,800;1,900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#080808;
+  --bg2:#0f0f0f;
+  --bg3:#161616;
+  --bg4:#1e1e1e;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.12);
+  --text:#ffffff;
+  --muted:rgba(255,255,255,0.45);
+  --accent:#f5c518;
+  --accent-dim:rgba(245,197,24,0.1);
+  --accent-border:rgba(245,197,24,0.3);
+  --r:12px;
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+/* ─── RAINBOW BAR ── */
+.rainbow-bar{
+  height:3px;
+  background:linear-gradient(90deg,#e40303 0%,#ff8c00 17%,#ffed00 33%,#008026 50%,#004dff 67%,#750787 83%,#e40303 100%);
+  background-size:200% 100%;
+  animation:rainbowShift 4s linear infinite;
+  position:sticky;top:0;z-index:200;
+}
+@keyframes rainbowShift{to{background-position:200% 0}}
+
+/* ─── NAV ── */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 28px;
+  background:rgba(8,8,8,0.96);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:3px;z-index:100;
+}
+.nav-logo{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.2rem;
+  letter-spacing:0.04em;color:var(--text);text-decoration:none;
+}
+.nav-logo em{font-style:italic;color:var(--accent);transition:color .4s}
+.nav-pill{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.63rem;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;
+  padding:5px 12px;border:1px solid var(--border2);border-radius:20px;color:var(--muted);
+}
+
+/* ─── LIVE SCORE TICKER ── */
+.live-ticker{
+  background:var(--bg2);border-bottom:1px solid var(--border);
+  padding:10px 0;overflow:hidden;
+}
+.live-ticker-inner{
+  display:flex;align-items:center;gap:0;
+  animation:tickerScroll 30s linear infinite;
+  width:max-content;
+}
+.live-ticker-inner:hover{animation-play-state:paused}
+@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item{
+  display:flex;align-items:center;gap:10px;
+  padding:0 28px;border-right:1px solid var(--border);
+  flex-shrink:0;
+}
+.ticker-live-dot{
+  width:6px;height:6px;border-radius:50%;background:#ef4444;flex-shrink:0;
+  animation:pulse 1s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+.ticker-status{
+  font-family:'Barlow Condensed',sans-serif;font-size:.6rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;
+}
+.ticker-status.live{color:#ef4444}
+.ticker-status.ft{color:var(--muted)}
+.ticker-status.ko{color:var(--accent);transition:color .4s}
+.ticker-match{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.88rem;
+  display:flex;align-items:center;gap:6px;
+}
+.t-team{display:flex;align-items:center;gap:5px}
+.t-code{
+  font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.72rem;
+  letter-spacing:.06em;padding:2px 5px;border-radius:4px;
+  background:rgba(255,255,255,.08);color:var(--text);white-space:nowrap;
+}
+.t-score{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:.95rem;
+  color:var(--text);min-width:32px;text-align:center;
+}
+.t-vs{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;color:var(--muted)}
+.ticker-time{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:var(--muted);letter-spacing:.04em}
+
+/* ─── HERO ── */
+.hero{
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding:72px 0 0;position:relative;overflow:hidden;text-align:center;
+  user-select:none;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 0%,var(--accent-dim) 0%,transparent 70%),
+    radial-gradient(ellipse 40% 30% at 10% 80%,rgba(245,197,24,.03) 0%,transparent 60%);
+  transition:background .6s;
+}
+.hero::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);
+  background-size:56px 56px;
+}
+.hero-inner{position:relative;z-index:1;max-width:720px;width:100%;padding:0 32px;margin-bottom:56px}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:'Barlow Condensed',sans-serif;font-size:.66rem;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;
+  padding:6px 14px;border:1px solid var(--accent-border);border-radius:20px;
+  color:var(--accent);margin-bottom:28px;
+  transition:color .4s,border-color .4s;
+}
+.eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite;transition:background .4s}
+
+.hero h1{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;
+  font-size:clamp(3.2rem,10vw,6.5rem);line-height:.92;
+  text-transform:uppercase;letter-spacing:-.01em;margin-bottom:22px;
+}
+.hero h1 em{font-style:italic;color:var(--accent);transition:color .4s;display:block}
+
+.hero-sub{
+  font-size:1rem;line-height:1.7;
+  color:var(--muted);max-width:440px;margin:0 auto 40px;
+}
+
+/* Rainbow glow button — no wrapper, no pseudo-elements, no pointer-event traps */
+@keyframes rainbowGlow{
+  0%  {box-shadow:0 0 0 3px #e40303,0 0 24px 4px rgba(228,3,3,.5)}
+  17% {box-shadow:0 0 0 3px #ff8c00,0 0 24px 4px rgba(255,140,0,.5)}
+  33% {box-shadow:0 0 0 3px #ffed00,0 0 24px 4px rgba(255,237,0,.5)}
+  50% {box-shadow:0 0 0 3px #008026,0 0 24px 4px rgba(0,128,38,.5)}
+  67% {box-shadow:0 0 0 3px #004dff,0 0 24px 4px rgba(0,77,255,.5)}
+  83% {box-shadow:0 0 0 3px #750787,0 0 24px 4px rgba(117,7,135,.5)}
+  100%{box-shadow:0 0 0 3px #e40303,0 0 24px 4px rgba(228,3,3,.5)}
+}
+.hero-cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.15rem;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:18px 40px;background:#000;color:#fff;
+  border:none;border-radius:10px;cursor:pointer;
+  animation:rainbowGlow 3s linear infinite;
+  transition:background .2s,transform .15s;
+  position:relative;z-index:1;
+}
+.hero-cta-btn:hover{background:#111;transform:translateY(-1px)}
+.hero-cta-btn:active{transform:translateY(0)}
+
+/* ─── SLIDESHOW (inside hero) ── */
+.hero-slideshow{position:relative;z-index:1;width:100%;margin-top:40px;padding-bottom:48px}
+.slideshow-dots-row{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  margin-bottom:20px;
+}
+.slide-dots{display:flex;gap:6px;align-items:center}
+.sdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .3s}
+.sdot.active{background:var(--accent);width:18px;border-radius:4px}
+
+.cards-viewport{overflow:hidden;padding:0 24px 4px}
+.cards-track{display:flex;gap:16px;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+
+.slide-card{
+  flex-shrink:0;
+  width:260px;height:380px;
+  border-radius:18px;position:relative;overflow:hidden;
+  cursor:pointer;transition:transform .2s,box-shadow .3s;
+  border:1px solid rgba(255,255,255,.06);
+}
+.slide-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.7)}
+.sc-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.sc-scrim{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.04) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,.6) 65%,rgba(0,0,0,.95) 100%)}
+.sc-body{position:absolute;inset:0;display:flex;flex-direction:column}
+.sc-photo{
+  margin:24px auto 0;width:80px;height:80px;border-radius:50%;
+  background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;
+  color:rgba(255,255,255,.5);position:relative;
+}
+.sc-ring{position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--sca,#f5c518)}
+.sc-info{position:absolute;bottom:0;left:0;right:0;padding:0 14px 16px;text-align:center}
+.sc-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;text-transform:uppercase;line-height:1.1;margin-bottom:3px}
+.sc-handle{font-family:'Barlow Condensed',sans-serif;font-size:.6rem;font-weight:600;color:var(--sca,#f5c518);letter-spacing:.05em;margin-bottom:6px}
+.sc-badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:.46rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--sca,#f5c518);border-radius:12px;color:var(--sca,#f5c518);margin-bottom:4px}
+.sc-country{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-style:italic;font-size:.95rem;text-transform:uppercase;color:var(--sca,#f5c518)}
+
+/* ─── STATS ── */
+.stats-section{
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:40px 24px;text-align:center;position:relative;overflow:hidden;
+}
+.stats-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 100% at 50%,var(--accent-dim),transparent 70%);
+  transition:background .5s;pointer-events:none;
+}
+.stats-grid{display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;position:relative}
+.stat-item{text-align:center}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:3rem;line-height:1;color:var(--accent);transition:color .4s}
+.stat-label{font-family:'Barlow Condensed',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.stat-div{width:1px;height:48px;background:var(--border)}
+
+/* ─── FIXTURES ── */
+.fixtures-section{padding:56px 24px;background:var(--bg2);border-bottom:1px solid var(--border)}
+.fixtures-inner{max-width:900px;margin:0 auto}
+.section-label{
+  font-family:'Barlow Condensed',sans-serif;font-size:.62rem;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--accent);
+  margin-bottom:8px;transition:color .4s;text-align:center;
+}
+.section-title{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;
+  font-size:clamp(1.8rem,4vw,2.4rem);text-transform:uppercase;
+  margin-bottom:32px;text-align:center;
+}
+.fixtures-grid{display:flex;flex-direction:column;gap:10px}
+.fixture-row{
+  display:flex;align-items:center;justify-content:center;gap:0;
+  background:var(--bg3);border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;padding:0;
+}
+.fix-status-col{
+  width:60px;display:flex;align-items:center;justify-content:center;
+  padding:16px 0;flex-shrink:0;
+}
+.fix-status{
+  font-family:'Barlow Condensed',sans-serif;font-size:.56rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:3px 7px;border-radius:4px;text-align:center;white-space:nowrap;
+}
+.fix-status.live{background:#ef4444;color:#fff}
+.fix-status.upcoming{background:rgba(245,197,24,.12);color:var(--accent);border:1px solid var(--accent-border)}
+.fix-status.finished{background:rgba(255,255,255,.05);color:var(--muted)}
+
+.fix-teams{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:0;
+  padding:14px 0;
+}
+.fix-team{
+  display:flex;align-items:center;gap:8px;flex:1;
+}
+.fix-team.home{justify-content:flex-end}
+.fix-team.away{justify-content:flex-start}
+.fix-code{
+  font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.78rem;
+  letter-spacing:.08em;padding:3px 7px;border-radius:5px;
+  background:rgba(255,255,255,.07);color:var(--text);white-space:nowrap;
+  flex-shrink:0;
+}
+.fix-name{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.9rem;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  max-width:120px;
+}
+.fix-center{
+  width:70px;flex-shrink:0;text-align:center;
+}
+.fix-score{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.2rem;
+  color:var(--text);
+}
+.fix-score.live-score{color:var(--accent);transition:color .4s}
+.fix-vs{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;color:var(--muted)}
+.fix-time-col{
+  width:80px;text-align:center;padding:14px 12px;flex-shrink:0;
+  border-left:1px solid var(--border);
+}
+.fix-time{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;font-weight:700;color:var(--muted);line-height:1.3}
+.fix-venue{font-family:'Barlow Condensed',sans-serif;font-size:.55rem;color:rgba(255,255,255,.25);margin-top:2px;line-height:1.3}
+@media(max-width:540px){
+  .fix-name{display:none}
+  .fix-time-col{width:60px;padding:14px 8px}
+  .fix-center{width:56px}
+}
+
+/* ─── HOW IT WORKS ── */
+.how-section{max-width:960px;margin:0 auto;padding:72px 24px;text-align:center}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+@media(max-width:640px){.steps-grid{grid-template-columns:1fr;max-width:340px;margin:40px auto 0}}
+.step-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:16px;
+  padding:28px 22px;text-align:left;position:relative;overflow:hidden;
+}
+.step-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);transition:background .4s}
+.step-num-big{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:4rem;line-height:1;color:rgba(255,255,255,.04);position:absolute;top:10px;right:16px}
+.step-icon{font-size:1.8rem;margin-bottom:14px}
+.step-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.step-desc{font-size:.83rem;line-height:1.65;color:var(--muted)}
+
+/* ─── FOOTER ── */
+footer{padding:36px 28px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);flex-wrap:wrap;gap:12px}
+.footer-logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1rem;color:var(--muted)}
+.footer-logo em{font-style:italic;color:var(--accent);transition:color .4s}
+.footer-text{font-size:.75rem;color:rgba(255,255,255,.22);text-align:center}
+
+/* ─── TOAST ── */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#1c1c1c;border:1px solid rgba(255,255,255,.1);color:var(--text);padding:12px 22px;border-radius:10px;font-size:.88rem;font-weight:500;z-index:9999;transition:transform .3s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ─── OVERLAY (full-screen, slides up, Mexican-project style) ── */
+#genOverlay{
+  position:fixed;inset:0;z-index:9000;
+  background:var(--bg);
+  display:flex;flex-direction:column;
+  transform:translateY(100%);
+  transition:transform .5s cubic-bezier(0.32,0.72,0,1);
+  overflow:hidden;
+}
+#genOverlay.open{transform:translateY(0)}
+
+/* top nav bar */
+.ov-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 28px;border-bottom:1px solid var(--border);
+  flex-shrink:0;position:sticky;top:0;background:var(--bg);z-index:1;
+}
+.ov-logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1rem;letter-spacing:.06em;color:var(--muted)}
+.ov-logo em{font-style:italic;color:var(--accent);transition:color .4s}
+.ov-close{width:36px;height:36px;border-radius:50%;background:var(--bg3);border:1px solid var(--border2);color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;transition:all .15s;flex-shrink:0}
+.ov-close:hover{background:var(--bg4);color:var(--text)}
+
+/* centered step number indicator */
+.ov-stepper{
+  display:flex;align-items:center;justify-content:center;gap:0;
+  padding:22px 0 0;flex-shrink:0;
+}
+.ov-pip{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+}
+.pip-circle{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.95rem;
+  border:2px solid var(--border2);color:var(--muted);
+  transition:all .3s;
+}
+.ov-pip.active .pip-circle{background:var(--accent);border-color:var(--accent);color:#000;transition:background .4s,border-color .4s}
+.ov-pip.done .pip-circle{background:var(--bg3);border-color:var(--accent);color:var(--accent)}
+.pip-label{font-family:'Barlow Condensed',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.ov-pip.active .pip-label{color:var(--accent)}
+.ov-conn{width:60px;height:2px;background:var(--border);margin:0 4px;margin-bottom:22px;flex-shrink:0;transition:background .4s}
+.ov-conn.done{background:var(--accent)}
+@media(max-width:400px){.ov-conn{width:32px}}
+
+/* step content: centered, capped width */
+.ov-steps{flex:1;overflow:hidden;position:relative}
+.ov-step{
+  position:absolute;inset:0;overflow-y:auto;
+  padding:28px 24px 120px;
+  opacity:0;pointer-events:none;transform:translateX(30px);
+  transition:opacity .3s,transform .3s;
+}
+.ov-step.active{opacity:1;pointer-events:all;transform:translateX(0)}
+.ov-step.exit{transform:translateX(-30px)}
+.ov-step::-webkit-scrollbar{width:3px}
+.ov-step::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:4px}
+/* inner content centered */
+.ov-step-inner{max-width:560px;margin:0 auto}
+
+/* footer */
+.ov-footer{
+  padding:16px 24px;border-top:1px solid var(--border);
+  display:flex;gap:10px;flex-shrink:0;background:var(--bg);
+}
+.ov-footer-inner{max-width:560px;margin:0 auto;display:flex;gap:10px;flex:1}
+
+.step-heading{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:1.6rem;text-transform:uppercase;margin-bottom:6px}
+.step-sub{font-size:.85rem;color:var(--muted);margin-bottom:22px;line-height:1.5}
+
+.m-search{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:11px 14px;color:var(--text);font-family:'Barlow',sans-serif;font-size:.9rem;margin-bottom:12px;outline:none;transition:border-color .2s}
+.m-search:focus{border-color:var(--accent-border)}
+.m-search::placeholder{color:rgba(255,255,255,.2)}
+
+.m-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:7px}
+.m-cbtn{display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;cursor:pointer;color:var(--muted);font-family:'Barlow',sans-serif;font-size:.8rem;font-weight:500;text-align:left;width:100%;transition:all .15s}
+.m-cbtn:hover{border-color:rgba(255,255,255,.18);color:var(--text);background:var(--bg4)}
+.m-cbtn.sel{border-color:var(--accent);background:var(--accent-dim);color:var(--accent);font-weight:600}
+.m-code{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.68rem;letter-spacing:.04em;padding:2px 5px;border-radius:4px;background:rgba(255,255,255,.07);flex-shrink:0;min-width:32px;text-align:center}
+.m-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.f-group{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.f-label{font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.f-input{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:13px 16px;color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:600;outline:none;width:100%;transition:border-color .2s}
+.f-input:focus{border-color:var(--accent-border)}
+.f-input::placeholder{color:rgba(255,255,255,.18);font-weight:400;font-size:1rem}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:400px){.f-row{grid-template-columns:1fr}}
+.f-inline{display:flex;gap:8px}
+.f-inline .f-input{flex:1}
+.btn-dice{background:#000;border:none;border-radius:var(--r);color:#fff;padding:0 15px;cursor:pointer;font-size:1.1rem;transition:opacity .15s;flex-shrink:0;animation:rainbowGlow 3s linear infinite}
+.btn-dice:hover{opacity:.8}
+
+.upload-area{border:1.5px dashed rgba(255,255,255,.12);border-radius:var(--r);padding:28px 20px;text-align:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.upload-area:hover{border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.02)}
+.upload-area.ready{border-style:solid;border-color:var(--accent-border)}
+.upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-icon{font-size:1.8rem;margin-bottom:8px}
+.upload-hint{font-size:.85rem;color:var(--muted)}
+.upload-thumb{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid var(--accent);margin:0 auto 8px;display:block;transition:border-color .4s}
+
+.modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;flex-shrink:0}
+.btn-back{padding:13px 20px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.btn-back:hover{border-color:var(--border2);color:var(--text)}
+.btn-next{flex:1;padding:13px 20px;background:#000;color:#fff;border:none;border-radius:var(--r);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;animation:rainbowGlow 3s linear infinite;transition:opacity .2s}
+.btn-next:hover{opacity:.85}
+
+/* ─── CARD (modal step 3) ── */
+.card-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
+#idCard{width:280px;height:420px;border-radius:20px;position:relative;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.06),0 24px 60px rgba(0,0,0,.8);font-family:'Barlow Condensed',sans-serif;background:#111;transition:box-shadow .5s}
+.card-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.card-scrim{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.06) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,.55) 65%,rgba(0,0,0,.93) 100%)}
+.card-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center}
+.card-photo-area{margin-top:28px;position:relative;width:100px;height:100px}
+.card-ring{position:absolute;inset:-4px;border-radius:50%;border:2.5px solid var(--ca,#f5c518);box-shadow:0 0 18px color-mix(in srgb,var(--ca,#f5c518) 40%,transparent)}
+.card-photo-img{width:100px;height:100px;border-radius:50%;object-fit:cover;display:block}
+.card-photo-ph{width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:rgba(255,255,255,.25)}
+.card-info{position:absolute;bottom:0;left:0;right:0;padding:0 18px 18px;text-align:center}
+.card-fn{font-weight:800;font-size:1.55rem;line-height:1;text-transform:uppercase;color:#fff;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.7)}
+.card-sn{font-weight:800;font-size:1.55rem;line-height:1;text-transform:uppercase;color:#fff;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.7);margin-bottom:3px}
+.card-handle{font-weight:600;font-size:.75rem;color:var(--ca,#f5c518);letter-spacing:.05em;margin-bottom:8px;display:none}
+.card-wc{font-size:.52rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:4px}
+.card-badge-pill{display:inline-block;font-size:.48rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:2px 9px;border:1px solid var(--ca,#f5c518);border-radius:12px;color:var(--ca,#f5c518);margin-bottom:6px}
+.card-country{font-weight:800;font-style:italic;font-size:1.3rem;text-transform:uppercase;color:var(--ca,#f5c518);letter-spacing:.04em;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.card-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:rgba(255,255,255,.18);text-align:center;padding:24px}
+.card-empty .e-icon{font-size:2.5rem}
+.card-empty p{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;line-height:1.5}
+.card-actions{display:flex;gap:10px;width:280px}
+.btn-dl,.btn-sh{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;border-radius:10px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none}
+.btn-dl{background:var(--accent);color:#000;transition:background .4s,opacity .2s}
+.btn-dl:hover{opacity:.88}
+.btn-sh{background:var(--bg3);color:var(--text);border:1px solid var(--border)}
+.btn-sh:hover{border-color:var(--border2)}
+.btn-dl:disabled,.btn-sh:disabled{opacity:.28;cursor:not-allowed}
+.regen-link{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;padding:0;transition:color .2s}
+.regen-link:hover{color:var(--text)}
+</style>
+</head>
+<body>
+
+<!-- RAINBOW BAR -->
+<div class="rainbow-bar"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><em>WC</em>2026 FANCARD</a>
+  <span class="nav-pill">FIFA World Cup 2026</span>
+</nav>
+
+<!-- LIVE TICKER -->
+<div class="live-ticker">
+  <div class="live-ticker-inner" id="tickerInner"></div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-dot"></span>
+      Official Fan Card Generator · 32 Nations
+    </div>
+    <h1>Rep Your<br><em>Nation.</em></h1>
+    <p class="hero-sub">Pick your country, upload your photo, and get your official FIFA World Cup 2026 fan card. Share it with the world.</p>
+    <button class="hero-cta-btn" id="heroCtaBtn">⚡ Get Your Fan Card</button>
+  </div>
+  <!-- STATS inside hero, above slideshow -->
+  <div class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num" id="cardCount">—</div>
+        <div class="stat-label">Cards Generated</div>
+      </div>
+      <div class="stat-div"></div>
+      <div class="stat-item">
+        <div class="stat-num">32</div>
+        <div class="stat-label">Nations</div>
+      </div>
+      <div class="stat-div"></div>
+      <div class="stat-item">
+        <div class="stat-num">2026</div>
+        <div class="stat-label">FIFA World Cup</div>
+      </div>
+    </div>
+  </div>
+  <!-- SLIDESHOW -->
+  <div class="hero-slideshow">
+    <div class="slideshow-dots-row">
+      <div class="slide-dots" id="slideDots"></div>
+    </div>
+    <div class="cards-viewport">
+      <div class="cards-track" id="cardsTrack"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FIXTURES -->
+<section class="fixtures-section">
+  <div class="fixtures-inner">
+    <div class="section-label">FIFA World Cup 2026</div>
+    <div class="section-title">Today's Fixtures</div>
+    <div class="fixtures-grid" id="fixturesGrid"></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="section-label">How It Works</div>
+  <div class="section-title">Three Steps.<br>One Epic Card.</div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num-big">01</div>
+      <div class="step-icon">🌍</div>
+      <div class="step-name">Pick Your Nation</div>
+      <p class="step-desc">Choose from all 32 FIFA World Cup 2026 nations. Your card colors adapt to your country.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num-big">02</div>
+      <div class="step-icon">📸</div>
+      <div class="step-name">Add Your Details</div>
+      <p class="step-desc">Enter your name, @handle, and upload your photo. Or roll a random local surname.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num-big">03</div>
+      <div class="step-icon">⚡</div>
+      <div class="step-name">Share & Rep</div>
+      <p class="step-desc">Download your fan card in HD and share it everywhere. Let the world see which side you're on.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">WC<em>2026</em> FANCARD</div>
+  <div class="footer-text">FIFA World Cup 2026 Fan Card Generator</div>
+  <div class="footer-text"><span id="yr"></span></div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<!-- FULL-SCREEN OVERLAY -->
+<div id="genOverlay">
+  <div class="ov-nav">
+    <div class="ov-logo"><em>WC</em>2026 FANCARD</div>
+    <button class="ov-close" id="ovClose">✕</button>
+  </div>
+
+  <!-- Numbered step bubbles (centered, like Mexican project) -->
+  <div class="ov-stepper">
+    <div class="ov-pip active" id="pip1"><div class="pip-circle">1</div><div class="pip-label">Country</div></div>
+    <div class="ov-conn" id="conn1"></div>
+    <div class="ov-pip" id="pip2"><div class="pip-circle">2</div><div class="pip-label">Details</div></div>
+    <div class="ov-conn" id="conn2"></div>
+    <div class="ov-pip" id="pip3"><div class="pip-circle">3</div><div class="pip-label">Your Card</div></div>
+  </div>
+
+  <div class="ov-steps">
+
+    <!-- Step 1: Country -->
+    <div class="ov-step active" id="mStep1">
+      <div class="ov-step-inner">
+        <div class="step-heading">Pick Your Nation</div>
+        <p class="step-sub">Select the country you're supporting at FIFA World Cup 2026.</p>
+        <input class="m-search" id="mSearch" type="text" placeholder="Search country..." autocomplete="off">
+        <div class="m-grid" id="mGrid"></div>
+      </div>
+    </div>
+
+    <!-- Step 2: Details -->
+    <div class="ov-step" id="mStep2">
+      <div class="ov-step-inner">
+        <div class="step-heading">Your Details</div>
+        <p class="step-sub">Personalise your official fan card.</p>
+        <div class="f-row">
+          <div class="f-group">
+            <label class="f-label">First Name</label>
+            <input class="f-input" id="fFN" type="text" placeholder="Your name" maxlength="20">
+          </div>
+          <div class="f-group">
+            <label class="f-label">Surname <span style="opacity:.5;font-weight:400;text-transform:none;letter-spacing:0">(or roll one)</span></label>
+            <div class="f-inline">
+              <input class="f-input" id="fSN" type="text" placeholder="Surname" maxlength="24">
+              <button class="btn-dice" id="btnDice">🎲</button>
+            </div>
+          </div>
+        </div>
+        <div class="f-group">
+          <label class="f-label">Nickname or Handle</label>
+          <input class="f-input" id="fHandle" type="text" placeholder="@yourhandle or nickname" maxlength="28">
+        </div>
+        <div class="f-group" style="margin-top:4px">
+          <label class="f-label">Photo</label>
+          <div class="upload-area" id="uploadArea">
+            <input type="file" id="photoInput" accept="image/*">
+            <div id="uploadContent">
+              <div class="upload-icon">📸</div>
+              <div class="upload-hint">Tap to upload your photo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Card -->
+    <div class="ov-step" id="mStep3">
+      <div class="ov-step-inner">
+        <div class="card-wrap">
+          <div id="idCard">
+            <div class="card-bg" id="cardBg"></div>
+            <div class="card-scrim"></div>
+            <div class="card-content">
+              <div class="card-empty" id="cardEmpty"><div class="e-icon">🌍</div><p>Building<br>your card…</p></div>
+              <div class="card-photo-area" id="cardPhotoArea" style="display:none">
+                <div class="card-ring"></div>
+                <img class="card-photo-img" id="cardPhotoImg" src="" alt="" style="display:none">
+                <div class="card-photo-ph" id="cardPhotoPh">👤</div>
+              </div>
+              <div class="card-info" id="cardInfo" style="display:none">
+                <div class="card-fn" id="cFN"></div>
+                <div class="card-sn" id="cSN"></div>
+                <div class="card-handle" id="cHandle"></div>
+                <div class="card-wc">FIFA World Cup 2026</div>
+                <div class="card-badge-pill">Official Fan</div>
+                <div class="card-country" id="cCountry"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="btn-dl" id="btnDl">⬇ Download</button>
+            <button class="btn-sh" id="btnSh">↗ Share</button>
+          </div>
+          <button class="regen-link" id="btnChangeCountry">← Change Country</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="ov-footer" id="ovFooter">
+    <div class="ov-footer-inner">
+      <button class="btn-back" id="btnBack" style="display:none">← Back</button>
+      <button class="btn-next" id="btnNext">Next →</button>
+    </div>
+  </div>
+</div>
+
+<script src="data/names.js"></script>
+<script>
+// ── BACKGROUNDS ───────────────────────────────────────────────────────────────
+const BGRND = {
+  ghana: 'https://d8j0ntlcm91z4.cloudfront.net/user_3EPeKIrXn4qdDc2gpS68QSP8esQ/hf_20260612_023430_c0652f54-bdeb-46dd-9f9e-f72fd545f833.png',
+};
+
+// All 48 FIFA World Cup 2026 teams
+const ORDER = [
+  // Big names first
+  'brazil','france','germany','spain','argentina','england','portugal',
+  'netherlands','mexico','usa','ghana','morocco','senegal',
+  'south_korea','japan','south_africa','egypt','colombia','uruguay','ecuador',
+  // Europe continued
+  'belgium','croatia','switzerland','austria','turkey','scotland',
+  'norway','sweden','bosnia','czech_republic',
+  // Africa
+  'ivory_coast','algeria','cabo_verde','tunisia','dr_congo',
+  // Asia
+  'saudi_arabia','australia','iran','qatar','uzbekistan','jordan','iraq',
+  // Americas
+  'canada','paraguay','panama','haiti','curacao',
+  // Oceania
+  'new_zealand',
+];
+
+// Official 3-letter codes
+const CODES = {
+  brazil:'BRA',france:'FRA',germany:'GER',spain:'ESP',argentina:'ARG',
+  england:'ENG',portugal:'POR',netherlands:'NED',mexico:'MEX',usa:'USA',
+  ghana:'GHA',morocco:'MAR',senegal:'SEN',south_korea:'KOR',japan:'JPN',
+  south_africa:'RSA',egypt:'EGY',colombia:'COL',uruguay:'URU',ecuador:'ECU',
+  belgium:'BEL',croatia:'CRO',switzerland:'SUI',austria:'AUT',turkey:'TUR',
+  scotland:'SCO',norway:'NOR',sweden:'SWE',bosnia:'BIH',czech_republic:'CZE',
+  ivory_coast:'CIV',algeria:'ALG',cabo_verde:'CPV',tunisia:'TUN',dr_congo:'COD',
+  saudi_arabia:'KSA',australia:'AUS',iran:'IRN',qatar:'QAT',uzbekistan:'UZB',
+  jordan:'JOR',iraq:'IRQ',canada:'CAN',paraguay:'PAR',panama:'PAN',
+  haiti:'HAI',curacao:'CUW',new_zealand:'NZL',
+};
+
+// 2026 home kit accent colors (researched from official kits)
+const ACCENTS = {
+  brazil:'#FCBD00',france:'#002395',germany:'#DD0000',spain:'#AA151B',
+  argentina:'#74ACDF',england:'#FFFFFF',portugal:'#AA0000',netherlands:'#FF6600',
+  mexico:'#006847',usa:'#BF0A30',ghana:'#FFFFFF',morocco:'#C1272D',
+  senegal:'#00853F',south_korea:'#CD2E3A',japan:'#003DA5',south_africa:'#FFB612',
+  egypt:'#CE1126',colombia:'#FCD116',uruguay:'#5BB8F5',ecuador:'#FFD100',
+  belgium:'#EF3340',croatia:'#EE2222',switzerland:'#EE2222',austria:'#ED2939',
+  turkey:'#E30A17',scotland:'#003DA5',norway:'#EF2B2D',sweden:'#006AA7',
+  bosnia:'#002868',czech_republic:'#FFFFFF',ivory_coast:'#F77F00',algeria:'#006233',
+  cabo_verde:'#003893',tunisia:'#E70013',dr_congo:'#007FFF',saudi_arabia:'#006C35',
+  australia:'#FFD200',iran:'#239F40',qatar:'#8D1B3D',uzbekistan:'#1EB4FB',
+  jordan:'#007A3D',iraq:'#CE1126',canada:'#EE2222',paraguay:'#FFFFFF',
+  panama:'#DA291C',haiti:'#00209F',curacao:'#003DA5',new_zealand:'#CC0000',
+};
+
+function getAccent(key) {
+  return ACCENTS[key] || '#f5c518';
+}
+function darken(hex,amt){
+  try{const c=hex.replace('#','');return '#'+[parseInt(c.slice(0,2),16),parseInt(c.slice(2,4),16),parseInt(c.slice(4,6),16)].map(x=>Math.max(0,x-amt).toString(16).padStart(2,'0')).join('');}catch{return '#111'}
+}
+function hexRgb(hex){const c=hex.replace('#','');return `${parseInt(c.slice(0,2),16)},${parseInt(c.slice(2,4),16)},${parseInt(c.slice(4,6),16)}`}
+
+function setAccent(hex){
+  const r=document.documentElement;
+  r.style.setProperty('--accent',hex);
+  r.style.setProperty('--accent-dim',`rgba(${hexRgb(hex)},.1)`);
+  r.style.setProperty('--accent-border',`rgba(${hexRgb(hex)},.32)`);
+}
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let selKey=null, photoUrl=null, curStep=1;
+
+// ── FIREBASE ──────────────────────────────────────────────────────────────────
+const FB='https://pick-a-side-80579-default-rtdb.firebaseio.com/wc2026_cards.json';
+const countEl=document.getElementById('cardCount');
+function animNum(el,to){
+  const from=parseInt(el.textContent.replace(/,/g,''))||0,t0=performance.now();
+  (function f(now){const p=Math.min((now-t0)/1600,1),e=1-Math.pow(1-p,3);el.textContent=Math.floor(from+(to-from)*e).toLocaleString();if(p<1)requestAnimationFrame(f);})(t0);
+}
+async function loadCount(){try{const r=await fetch(FB);animNum(countEl,(await r.json())||0);}catch{countEl.textContent='0'}}
+async function bumpCount(){
+  try{const r=await fetch(FB);const n=(await r.json())||0;const nx=n+1;
+  await fetch(FB,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(nx)});animNum(countEl,nx);}catch{}
+}
+const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){loadCount();io.disconnect();}},{threshold:.3});
+io.observe(countEl);
+
+// ── MATCHES DATA ──────────────────────────────────────────────────────────────
+// API endpoint (add key when ready): /api/matches?endpoint=competitions/WC/matches&status=SCHEDULED,IN_PLAY,FINISHED
+const FALLBACK=[
+  {home:'Ghana',hcode:'GHA',away:'USA',acode:'USA',status:'live',score:'1 – 0',venue:"Levi's Stadium"},
+  {home:'Brazil',hcode:'BRA',away:'Germany',acode:'GER',status:'upcoming',time:'18:00',venue:'MetLife Stadium'},
+  {home:'France',hcode:'FRA',away:'Argentina',acode:'ARG',status:'upcoming',time:'21:00',venue:"AT&T Stadium"},
+  {home:'Spain',hcode:'ESP',away:'Morocco',acode:'MAR',status:'finished',score:'2 – 1',venue:'SoFi Stadium'},
+  {home:'Nigeria',hcode:'NGA',away:'Netherlands',acode:'NED',status:'upcoming',time:'14:00',venue:'Rose Bowl'},
+  {home:'Japan',hcode:'JPN',away:'South Korea',acode:'KOR',status:'finished',score:'0 – 2',venue:'Gillette Stadium'},
+];
+
+function buildTicker(matches){
+  const wrap=document.getElementById('tickerInner');
+  const makeItems=()=>matches.map(m=>{
+    const live=m.status==='live',fin=m.status==='finished';
+    const dotHtml=live?`<div class="ticker-live-dot"></div>`:'';
+    const statusTxt=live?'LIVE':fin?'FT':'KO';
+    const statusCls=live?'live':fin?'ft':'ko';
+    const scoreHtml=live||fin?`<span class="t-score ${live?'live-score':''}">${m.score}</span>`:
+      `<span class="t-vs">vs</span>`;
+    const timeHtml=(live||fin)?'':`<span class="ticker-time">${m.time||''}</span>`;
+    return `<div class="ticker-item">
+      ${dotHtml}
+      <span class="ticker-status ${statusCls}">${statusTxt}</span>
+      <div class="ticker-match">
+        <div class="t-team"><span class="t-code">${m.hcode}</span>${m.home}</div>
+        ${scoreHtml}
+        <div class="t-team"><span class="t-code">${m.acode}</span>${m.away}</div>
+      </div>
+      ${timeHtml}
+    </div>`;
+  }).join('');
+  // Duplicate for seamless loop
+  wrap.innerHTML = makeItems() + makeItems();
+}
+
+function buildFixtures(matches){
+  const grid=document.getElementById('fixturesGrid');
+  grid.innerHTML=matches.map(m=>{
+    const live=m.status==='live',fin=m.status==='finished';
+    const statusTxt=live?'LIVE':fin?'FT':'KO';
+    const statusCls=live?'live':fin?'finished':'upcoming';
+    const scoreHtml=live||fin
+      ?`<div class="fix-score ${live?'live-score':''}">${m.score}</div>`
+      :`<div class="fix-vs">${m.time||'TBD'}</div>`;
+    return `<div class="fixture-row">
+      <div class="fix-status-col"><span class="fix-status ${statusCls}">${statusTxt}</span></div>
+      <div class="fix-teams">
+        <div class="fix-team home">
+          <span class="fix-name">${m.home}</span>
+          <span class="fix-code">${m.hcode}</span>
+        </div>
+        <div class="fix-center">${scoreHtml}</div>
+        <div class="fix-team away">
+          <span class="fix-code">${m.acode}</span>
+          <span class="fix-name">${m.away}</span>
+        </div>
+      </div>
+      <div class="fix-time-col">
+        <div class="fix-time">${m.venue?.split(' ').slice(0,2).join(' ')||''}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function loadMatches(){
+  try{
+    const r=await fetch('/api/matches?endpoint=competitions/WC/matches&status=SCHEDULED,IN_PLAY,FINISHED');
+    if(!r.ok)throw new Error();
+    const d=await r.json();
+    const mapped=(d.matches||[]).slice(0,8).map(m=>({
+      home:m.homeTeam?.shortName||m.homeTeam?.name||'',
+      hcode:m.homeTeam?.tla||'???',
+      away:m.awayTeam?.shortName||m.awayTeam?.name||'',
+      acode:m.awayTeam?.tla||'???',
+      status:m.status==='IN_PLAY'?'live':m.status==='FINISHED'?'finished':'upcoming',
+      score:`${m.score?.fullTime?.home??0} – ${m.score?.fullTime?.away??0}`,
+      time:m.utcDate?new Date(m.utcDate).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):'',
+      venue:m.venue||'',
+    }));
+    buildTicker(mapped); buildFixtures(mapped);
+  }catch{buildTicker(FALLBACK); buildFixtures(FALLBACK);}
+}
+loadMatches();
+
+// ── SLIDESHOW ─────────────────────────────────────────────────────────────────
+const SLIDES=[
+  {key:'ghana',    name:'Kofi',      sn:'Mensah',    handle:'@kofi_gh',   bg:BGRND.ghana},
+  {key:'brazil',   name:'Lucas',     sn:'Santos',    handle:'@lucassantos'},
+  {key:'netherlands',name:'Sven',    sn:'de Jong',   handle:'@sven_nld'},
+  {key:'argentina',name:'Matías',    sn:'Romero',    handle:'@matiasrmr'},
+  {key:'france',   name:'Théo',      sn:'Dubois',    handle:'@theo_fra'},
+  {key:'morocco',  name:'Youssef',   sn:'Amrabat',   handle:'@youssef_mar'},
+  {key:'usa',      name:'Tyler',     sn:'Jackson',   handle:'@tylerjackson'},
+  {key:'spain',    name:'Diego',     sn:'García',    handle:'@diegogarcia'},
+  {key:'germany',  name:'Lukas',     sn:'Müller',    handle:'@lukas_ger'},
+  {key:'japan',    name:'Haruto',    sn:'Tanaka',    handle:'@haruto_jpn'},
+  {key:'mexico',   name:'Alejandro', sn:'Reyes',     handle:'@alexreyes'},
+  {key:'south_korea',name:'Junho',   sn:'Park',      handle:'@junho_kor'},
+  {key:'portugal', name:'Rui',       sn:'Carvalho',  handle:'@rui_por'},
+  {key:'senegal',  name:'Ibrahima',  sn:'Diallo',    handle:'@ibra_sen'},
+  {key:'norway',   name:'Magnus',    sn:'Haaland',   handle:'@magnus_nor'},
+];
+let slideIdx=0,slideTimer;
+
+function buildSlideshow(){
+  const track=document.getElementById('cardsTrack');
+  const dots=document.getElementById('slideDots');
+  track.innerHTML=''; dots.innerHTML='';
+  SLIDES.forEach((d,i)=>{
+    const acc=getAccent(d.key);
+    const cdata=COUNTRY_SURNAMES[d.key];
+    const c=cdata?.colors;
+    const bgStyle=d.bg
+      ?`background-image:url(${d.bg})`
+      :`background-image:linear-gradient(155deg,${c?.primary||'#222'} 0%,${darken(c?.primary||'#222',55)} 45%,#080808 100%)`;
+    const code=CODES[d.key]||'???';
+    track.innerHTML+=`<div class="slide-card" style="--sca:${acc}">
+      <div class="sc-bg" style="${bgStyle}"></div>
+      <div class="sc-scrim"></div>
+      <div class="sc-body">
+        <div class="sc-photo"><div class="sc-ring"></div>${code}</div>
+        <div class="sc-info">
+          <div class="sc-name">${d.name}<br>${d.sn}</div>
+          <div class="sc-handle">${d.handle}</div>
+          <div class="sc-badge">Official Fan</div>
+          <div class="sc-country">${cdata?.country?.toUpperCase()||''}</div>
+        </div>
+      </div>
+    </div>`;
+    const dot=document.createElement('div');
+    dot.className='sdot'+(i===0?' active':'');
+    dot.onclick=()=>goSlide(i);
+    dots.appendChild(dot);
+  });
+}
+
+function goSlide(idx){
+  slideIdx=idx;
+  const cardW=220+14;
+  const track=document.getElementById('cardsTrack');
+  const vw=track.parentElement.offsetWidth;
+  const visible=Math.floor(vw/cardW);
+  const maxOff=Math.max(0,SLIDES.length-visible);
+  track.style.transform=`translateX(-${Math.min(idx,maxOff)*cardW}px)`;
+  document.querySelectorAll('.sdot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+}
+function autoSlide(){slideIdx=(slideIdx+1)%SLIDES.length;goSlide(slideIdx);}
+buildSlideshow();
+slideTimer=setInterval(autoSlide,3200);
+
+// ── OVERLAY (matches Mexican project pattern exactly) ─────────────────────────
+const genOverlay = document.getElementById('genOverlay');
+
+function openModal() {
+  genOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  goToStep(1);
+}
+function closeModal() {
+  genOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('ovClose').addEventListener('click', closeModal);
+document.getElementById('btnNext').addEventListener('click', nextStep);
+document.getElementById('btnBack').addEventListener('click', prevStep);
+document.getElementById('btnChangeCountry').addEventListener('click', function() { goToStep(1); });
+
+function goToStep(n) {
+  curStep = n;
+  // Update pip bubbles
+  [1,2,3].forEach(i => {
+    const pip = document.getElementById('pip'+i);
+    pip.classList.toggle('active', i === n);
+    pip.classList.toggle('done',   i < n);
+  });
+  // Update connectors
+  [1,2].forEach(i => document.getElementById('conn'+i).classList.toggle('done', i < n));
+  // Swap steps
+  document.querySelectorAll('.ov-step').forEach((s,i) => {
+    s.classList.remove('active','exit');
+    if(i+1 === n) s.classList.add('active');
+    else if(i+1 < n) s.classList.add('exit');
+  });
+  const back   = document.getElementById('btnBack');
+  const footer = document.getElementById('ovFooter');
+  back.style.display = n > 1 ? 'block' : 'none';
+  if(n === 3) {
+    footer.style.display = 'none';
+    renderCard();
+    bumpCount();
+  } else {
+    footer.style.display = 'flex';
+    document.getElementById('btnNext').textContent = n === 2 ? '⚡ Generate Card' : 'Next →';
+  }
+}
+function nextStep() {
+  if(curStep === 1 && !selKey) { toast('Pick a country first 🌍'); return; }
+  if(curStep === 2) {
+    if(!document.getElementById('fFN').value.trim()) { toast('Enter your first name'); return; }
+    if(!photoUrl) { toast('Please upload your photo 📸'); return; }
+  }
+  if(curStep < 3) goToStep(curStep + 1);
+}
+function prevStep() { if(curStep > 1) goToStep(curStep - 1); }
+
+// ── COUNTRY GRID ──────────────────────────────────────────────────────────────
+function buildGrid(q=''){
+  const g=document.getElementById('mGrid');g.innerHTML='';
+  const lq=q.toLowerCase();
+  ORDER.filter(k=>COUNTRY_SURNAMES[k]).forEach(k=>{
+    const d=COUNTRY_SURNAMES[k];
+    if(q&&!d.country.toLowerCase().includes(lq))return;
+    const b=document.createElement('button');
+    b.className='m-cbtn'+(selKey===k?' sel':'');
+    b.innerHTML=`<span class="m-code">${CODES[k]||'???'}</span><span class="m-name">${d.country}</span>`;
+    b.onclick=()=>pickCountry(k);
+    g.appendChild(b);
+  });
+}
+document.getElementById('mSearch').addEventListener('input',e=>buildGrid(e.target.value));
+
+function pickCountry(key){
+  selKey=key;setAccent(getAccent(key));
+  buildGrid(document.getElementById('mSearch').value);
+}
+
+// ── DICE ──────────────────────────────────────────────────────────────────────
+document.getElementById('btnDice').addEventListener('click',()=>{
+  if(!selKey){toast('Pick a country first');return;}
+  document.getElementById('fSN').value=getRandomSurname(selKey);
+});
+
+// ── PHOTO ─────────────────────────────────────────────────────────────────────
+document.getElementById('photoInput').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    photoUrl=ev.target.result;
+    document.getElementById('uploadArea').classList.add('ready');
+    document.getElementById('uploadContent').innerHTML=`<img class="upload-thumb" src="${photoUrl}"><div class="upload-hint" style="color:var(--accent)">Photo selected ✓</div>`;
+  };r.readAsDataURL(f);
+});
+
+// ── RENDER CARD ───────────────────────────────────────────────────────────────
+function renderCard(){
+  const card=document.getElementById('idCard');
+  const bg=document.getElementById('cardBg');
+  if(!selKey)return;
+  const data=COUNTRY_SURNAMES[selKey];
+  const accent=getAccent(selKey);
+  card.style.setProperty('--ca',accent);
+  card.style.boxShadow=`0 0 0 1px rgba(255,255,255,.06),0 24px 60px rgba(0,0,0,.8),0 0 40px rgba(${hexRgb(accent)},.15)`;
+  if(BGRND[selKey]){bg.style.backgroundImage=`url(${BGRND[selKey]})`;bg.style.backgroundSize='cover';}
+  else{const c=data.colors;bg.style.backgroundImage=`linear-gradient(155deg,${c.primary} 0%,${darken(c.primary,55)} 45%,#080808 100%)`;}
+
+  const fn=document.getElementById('fFN').value.trim()||'YOUR';
+  const sn=document.getElementById('fSN').value.trim()||'NAME';
+  let hn=document.getElementById('fHandle').value.trim();
+  if(hn&&!hn.startsWith('@'))hn='@'+hn;
+  document.getElementById('cFN').textContent=fn.toUpperCase();
+  document.getElementById('cSN').textContent=sn.toUpperCase();
+  const hEl=document.getElementById('cHandle');
+  if(hn){hEl.textContent=hn;hEl.style.display='block';}else hEl.style.display='none';
+  document.getElementById('cCountry').textContent=data.country.toUpperCase();
+
+  const img=document.getElementById('cardPhotoImg'),ph=document.getElementById('cardPhotoPh');
+  if(photoUrl){img.src=photoUrl;img.style.display='block';ph.style.display='none';}
+  else{img.style.display='none';ph.style.display='flex';}
+
+  document.getElementById('cardEmpty').style.display='none';
+  document.getElementById('cardPhotoArea').style.display='block';
+  document.getElementById('cardInfo').style.display='block';
+}
+
+// ── CAPTURE ───────────────────────────────────────────────────────────────────
+async function capture(scale=3){
+  const card=document.getElementById('idCard');
+  const cl=card.cloneNode(true);
+  cl.style.cssText=`position:fixed;top:0;left:0;z-index:-9999;width:${card.offsetWidth}px;margin:0;pointer-events:none;`;
+  document.body.appendChild(cl);
+  try{return await html2canvas(cl,{scale,useCORS:true,allowTaint:true,backgroundColor:null,logging:false,scrollX:0,scrollY:0});}
+  finally{document.body.removeChild(cl);}
+}
+
+document.getElementById('btnDl').addEventListener('click',async()=>{
+  const b=document.getElementById('btnDl');b.textContent='Generating…';b.disabled=true;
+  try{const c=await capture(4);const a=document.createElement('a');a.download=`wc2026-${(COUNTRY_SURNAMES[selKey]?.country||'fancard').toLowerCase().replace(/[\s']/g,'-')}.png`;a.href=c.toDataURL('image/png');a.click();}
+  catch{toast('Download failed — try again');}finally{b.innerHTML='⬇ Download';b.disabled=false;}
+});
+
+document.getElementById('btnSh').addEventListener('click',async()=>{
+  const b=document.getElementById('btnSh');b.textContent='Preparing…';b.disabled=true;
+  const ctry=COUNTRY_SURNAMES[selKey]?.country||'';
+  const txt=`I'm repping ${ctry} at the FIFA World Cup 2026! 🌍⚽ Get your fan card at https://wc2026-fancard.vercel.app`;
+  try{
+    const c=await capture(3);
+    c.toBlob(async blob=>{
+      const file=new File([blob],'wc2026-fancard.png',{type:'image/png'});
+      if(navigator.share&&navigator.canShare({files:[file]}))await navigator.share({text:txt,files:[file]});
+      else if(navigator.share)await navigator.share({text:txt});
+      else{await navigator.clipboard.writeText(txt);toast('Link copied!');}
+    },'image/png');
+  }catch(e){if(e.name!=='AbortError')toast('Share failed — try download');}
+  finally{b.innerHTML='↗ Share';b.disabled=false;}
+});
+
+// ── TOAST ─────────────────────────────────────────────────────────────────────
+let tt;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),3000);}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+document.getElementById('heroCtaBtn').addEventListener('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  openModal();
+});
+buildGrid();
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
