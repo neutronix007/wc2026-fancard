@@ -713,6 +713,8 @@ const BGRND = {
   south_korea: 'backgrounds/South Korea.webp',
   spain:       'backgrounds/Spain.webp',
   usa:         'backgrounds/Usa.webp',
+  morocco:     'backgrounds/morocco.webp',
+  netherlands: 'backgrounds/netherlands.webp',
 };
 
 // All 48 FIFA World Cup 2026 teams
@@ -1127,7 +1129,14 @@ async function captureCard(scale=6){
   clone.querySelectorAll('.card-country').forEach(el=>el.style.color=accent);
   clone.querySelectorAll('.card-badge-pill').forEach(el=>{el.style.color=accent;el.style.borderColor=accent;});
   clone.querySelectorAll('.card-handle').forEach(el=>el.style.color=accent);
-  clone.querySelectorAll('.card-photo-img,.card-photo-ph').forEach(el=>el.style.boxShadow=ringStyle);
+  clone.querySelectorAll('.card-photo-ph').forEach(el=>el.style.boxShadow=ringStyle);
+  // html2canvas doesn't support object-fit:cover on <img> — swap to background-image div
+  clone.querySelectorAll('.card-photo-img').forEach(img=>{
+    const w=img.offsetWidth||195, h=img.offsetHeight||195;
+    const div=document.createElement('div');
+    div.style.cssText=`width:${w}px;height:${h}px;border-radius:50%;background:url(${img.src}) center/cover no-repeat;display:block;box-shadow:${ringStyle}`;
+    img.parentNode.replaceChild(div,img);
+  });
   document.body.appendChild(clone);
   try{
     return await html2canvas(clone,{scale,useCORS:true,allowTaint:true,backgroundColor:null,logging:false,scrollX:0,scrollY:0});
