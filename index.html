@@ -199,19 +199,22 @@ nav{
 .slide-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.7)}
 .sc-bg{position:absolute;inset:0;background-size:cover;background-position:center}
 .sc-scrim{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.04) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,.6) 65%,rgba(0,0,0,.95) 100%)}
-.sc-body{position:absolute;inset:0;display:flex;flex-direction:column}
+.sc-body{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center}
 .sc-photo{
-  margin:24px auto 0;width:80px;height:80px;border-radius:50%;
+  margin:20px auto 0;width:130px;height:130px;border-radius:50%;
   background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;
   font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;
-  color:rgba(255,255,255,.5);position:relative;
+  color:rgba(255,255,255,.5);position:relative;overflow:hidden;flex-shrink:0;
 }
-.sc-ring{position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--sca,#f5c518)}
-.sc-info{position:absolute;bottom:0;left:0;right:0;padding:0 14px 16px;text-align:center}
-.sc-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;text-transform:uppercase;line-height:1.1;margin-bottom:3px}
+.sc-photo img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.sc-ring{position:absolute;inset:-4px;border-radius:50%;border:2.5px solid var(--sca,#f5c518);box-shadow:0 0 18px color-mix(in srgb,var(--sca,#f5c518) 45%,transparent)}
+.sc-info{position:absolute;bottom:0;left:0;right:0;padding:0 14px 14px;text-align:center}
+.sc-fn{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.25rem;line-height:1;text-transform:uppercase;color:#fff;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.7)}
+.sc-sn{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.25rem;line-height:1;text-transform:uppercase;color:#fff;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.7);margin-bottom:3px}
 .sc-handle{font-family:'Barlow Condensed',sans-serif;font-size:.6rem;font-weight:600;color:var(--sca,#f5c518);letter-spacing:.05em;margin-bottom:6px}
-.sc-badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:.46rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--sca,#f5c518);border-radius:12px;color:var(--sca,#f5c518);margin-bottom:4px}
-.sc-country{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-style:italic;font-size:.95rem;text-transform:uppercase;color:var(--sca,#f5c518)}
+.sc-wc{font-size:.46rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:4px}
+.sc-badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:.42rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--sca,#f5c518);border-radius:12px;color:var(--sca,#f5c518);margin-bottom:5px}
+.sc-country{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-style:italic;font-size:1.1rem;text-transform:uppercase;color:var(--sca,#f5c518);letter-spacing:.04em;text-shadow:0 2px 12px rgba(0,0,0,.6)}
 
 /* ─── STATS ── */
 .stats-section{
@@ -419,13 +422,18 @@ footer{padding:36px 28px;display:flex;align-items:center;justify-content:space-b
 .btn-dice{background:#000;border:none;border-radius:var(--r);color:#fff;padding:0 15px;cursor:pointer;font-size:1.1rem;transition:opacity .15s;flex-shrink:0;animation:rainbowGlow 3s linear infinite}
 .btn-dice:hover{opacity:.8}
 
-.upload-area{border:1.5px dashed rgba(255,255,255,.12);border-radius:var(--r);padding:28px 20px;text-align:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.upload-area{border:1.5px dashed rgba(255,255,255,.12);border-radius:var(--r);padding:28px 20px;text-align:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
 .upload-area:hover{border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.02)}
-.upload-area.ready{border-style:solid;border-color:var(--accent-border)}
-.upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-area.ready{border-style:solid;border-color:var(--accent-border);padding:0;cursor:default}
+.upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;z-index:1}
 .upload-icon{font-size:1.8rem;margin-bottom:8px}
 .upload-hint{font-size:.85rem;color:var(--muted)}
-.upload-thumb{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid var(--accent);margin:0 auto 8px;display:block;transition:border-color .4s}
+#uploadContent{width:100%;height:100%;position:relative}
+.upload-preview-img{width:100%;height:100%;object-fit:cover;display:block;border-radius:calc(var(--r) - 1px);position:absolute;inset:0}
+.upload-btn-row{display:flex;gap:8px;padding:10px;justify-content:center;position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));border-radius:0 0 calc(var(--r) - 1px) calc(var(--r) - 1px);z-index:2}
+.upload-change-btn,.upload-remove-btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.05em;text-transform:uppercase;padding:7px 18px;border-radius:6px;border:none;cursor:pointer;transition:opacity .15s;position:relative;z-index:2}
+.upload-change-btn{background:var(--accent);color:#000}
+.upload-remove-btn{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
 
 .modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;flex-shrink:0}
 .btn-back{padding:13px 20px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s}
@@ -439,10 +447,10 @@ footer{padding:36px 28px;display:flex;align-items:center;justify-content:space-b
 .card-bg{position:absolute;inset:0;background-size:cover;background-position:center}
 .card-scrim{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.06) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,.55) 65%,rgba(0,0,0,.93) 100%)}
 .card-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center}
-.card-photo-area{margin-top:28px;position:relative;width:100px;height:100px}
-.card-ring{position:absolute;inset:-4px;border-radius:50%;border:2.5px solid var(--ca,#f5c518);box-shadow:0 0 18px color-mix(in srgb,var(--ca,#f5c518) 40%,transparent)}
-.card-photo-img{width:100px;height:100px;border-radius:50%;object-fit:cover;display:block}
-.card-photo-ph{width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:rgba(255,255,255,.25)}
+.card-photo-area{margin-top:16px;position:relative;width:195px;height:195px}
+.card-ring{position:absolute;inset:-5px;border-radius:50%;border:3px solid var(--ca,#f5c518);box-shadow:0 0 28px color-mix(in srgb,var(--ca,#f5c518) 55%,transparent)}
+.card-photo-img{width:195px;height:195px;border-radius:50%;object-fit:cover;display:block}
+.card-photo-ph{width:195px;height:195px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:4rem;color:rgba(255,255,255,.25)}
 .card-info{position:absolute;bottom:0;left:0;right:0;padding:0 18px 18px;text-align:center}
 .card-fn{font-weight:800;font-size:1.55rem;line-height:1;text-transform:uppercase;color:#fff;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.7)}
 .card-sn{font-weight:800;font-size:1.55rem;line-height:1;text-transform:uppercase;color:#fff;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.7);margin-bottom:3px}
@@ -674,7 +682,9 @@ footer{padding:36px 28px;display:flex;align-items:center;justify-content:space-b
 <script>
 // ── BACKGROUNDS ───────────────────────────────────────────────────────────────
 const BGRND = {
-  ghana: 'https://d8j0ntlcm91z4.cloudfront.net/user_3EPeKIrXn4qdDc2gpS68QSP8esQ/hf_20260612_023430_c0652f54-bdeb-46dd-9f9e-f72fd545f833.png',
+  ghana:  'backgrounds/Ghana.webp',
+  norway: 'backgrounds/Norway.webp',
+  france: 'backgrounds/France.webp',
 };
 
 // All 48 FIFA World Cup 2026 teams
@@ -846,21 +856,21 @@ loadMatches();
 
 // ── SLIDESHOW ─────────────────────────────────────────────────────────────────
 const SLIDES=[
-  {key:'ghana',    name:'Kofi',      sn:'Mensah',    handle:'@kofi_gh',   bg:BGRND.ghana},
-  {key:'brazil',   name:'Lucas',     sn:'Santos',    handle:'@lucassantos'},
-  {key:'netherlands',name:'Sven',    sn:'de Jong',   handle:'@sven_nld'},
-  {key:'argentina',name:'Matías',    sn:'Romero',    handle:'@matiasrmr'},
-  {key:'france',   name:'Théo',      sn:'Dubois',    handle:'@theo_fra'},
-  {key:'morocco',  name:'Youssef',   sn:'Amrabat',   handle:'@youssef_mar'},
-  {key:'usa',      name:'Tyler',     sn:'Jackson',   handle:'@tylerjackson'},
-  {key:'spain',    name:'Diego',     sn:'García',    handle:'@diegogarcia'},
-  {key:'germany',  name:'Lukas',     sn:'Müller',    handle:'@lukas_ger'},
-  {key:'japan',    name:'Haruto',    sn:'Tanaka',    handle:'@haruto_jpn'},
-  {key:'mexico',   name:'Alejandro', sn:'Reyes',     handle:'@alexreyes'},
-  {key:'south_korea',name:'Junho',   sn:'Park',      handle:'@junho_kor'},
-  {key:'portugal', name:'Rui',       sn:'Carvalho',  handle:'@rui_por'},
-  {key:'senegal',  name:'Ibrahima',  sn:'Diallo',    handle:'@ibra_sen'},
-  {key:'norway',   name:'Magnus',    sn:'Haaland',   handle:'@magnus_nor'},
+  {key:'ghana',      name:'Kofi',      sn:'Mensah',    handle:'@kofi_gh',     bg:BGRND.ghana,  photo:'backgrounds/images/fan1.webp'},
+  {key:'france',     name:'Théo',      sn:'Dubois',    handle:'@theo_fra',    bg:BGRND.france, photo:'backgrounds/images/fan2.webp'},
+  {key:'norway',     name:'Magnus',    sn:'Eriksen',   handle:'@magnus_nor',  bg:BGRND.norway, photo:'backgrounds/images/fan3.webp'},
+  {key:'brazil',     name:'Lucas',     sn:'Santos',    handle:'@lucassantos',                  photo:'backgrounds/images/fan4.webp'},
+  {key:'netherlands',name:'Sven',      sn:'de Jong',   handle:'@sven_nld',                     photo:'backgrounds/images/fan1.webp'},
+  {key:'argentina',  name:'Matías',    sn:'Romero',    handle:'@matiasrmr',                    photo:'backgrounds/images/fan2.webp'},
+  {key:'morocco',    name:'Youssef',   sn:'Amrabat',   handle:'@youssef_mar',                  photo:'backgrounds/images/fan3.webp'},
+  {key:'usa',        name:'Tyler',     sn:'Jackson',   handle:'@tylerjackson',                 photo:'backgrounds/images/fan4.webp'},
+  {key:'spain',      name:'Diego',     sn:'García',    handle:'@diegogarcia',                  photo:'backgrounds/images/fan1.webp'},
+  {key:'germany',    name:'Lukas',     sn:'Müller',    handle:'@lukas_ger',                    photo:'backgrounds/images/fan2.webp'},
+  {key:'japan',      name:'Haruto',    sn:'Tanaka',    handle:'@haruto_jpn',                   photo:'backgrounds/images/fan3.webp'},
+  {key:'mexico',     name:'Alejandro', sn:'Reyes',     handle:'@alexreyes',                    photo:'backgrounds/images/fan4.webp'},
+  {key:'south_korea',name:'Junho',     sn:'Park',      handle:'@junho_kor',                    photo:'backgrounds/images/fan1.webp'},
+  {key:'portugal',   name:'Rui',       sn:'Carvalho',  handle:'@rui_por',                      photo:'backgrounds/images/fan2.webp'},
+  {key:'senegal',    name:'Ibrahima',  sn:'Diallo',    handle:'@ibra_sen',                     photo:'backgrounds/images/fan3.webp'},
 ];
 let slideIdx=0,slideTimer;
 
@@ -877,13 +887,15 @@ function buildSlideshow(){
       :`background-image:linear-gradient(155deg,${c?.primary||'#222'} 0%,${darken(c?.primary||'#222',55)} 45%,#080808 100%)`;
     const code=CODES[d.key]||'???';
     track.innerHTML+=`<div class="slide-card" style="--sca:${acc}">
-      <div class="sc-bg" style="${bgStyle}"></div>
+      <div class="sc-bg" style="${bgStyle};background-size:cover;background-position:center"></div>
       <div class="sc-scrim"></div>
       <div class="sc-body">
-        <div class="sc-photo"><div class="sc-ring"></div>${code}</div>
+        <div class="sc-photo"><div class="sc-ring"></div>${d.photo?`<img src="${d.photo}" alt="">`:`<span>${code}</span>`}</div>
         <div class="sc-info">
-          <div class="sc-name">${d.name}<br>${d.sn}</div>
-          <div class="sc-handle">${d.handle}</div>
+          <div class="sc-fn">${d.name.toUpperCase()}</div>
+          <div class="sc-sn">${d.sn.toUpperCase()}</div>
+          ${d.handle?`<div class="sc-handle">${d.handle}</div>`:''}
+          <div class="sc-wc">FIFA World Cup 2026</div>
           <div class="sc-badge">Official Fan</div>
           <div class="sc-country">${cdata?.country?.toUpperCase()||''}</div>
         </div>
@@ -999,10 +1011,30 @@ document.getElementById('photoInput').addEventListener('change',e=>{
   const r=new FileReader();
   r.onload=ev=>{
     photoUrl=ev.target.result;
-    document.getElementById('uploadArea').classList.add('ready');
-    document.getElementById('uploadContent').innerHTML=`<img class="upload-thumb" src="${photoUrl}"><div class="upload-hint" style="color:var(--accent)">Photo selected ✓</div>`;
+    showPhotoPreview(photoUrl);
   };r.readAsDataURL(f);
 });
+
+function showPhotoPreview(url) {
+  const area = document.getElementById('uploadArea');
+  area.classList.add('ready');
+  document.getElementById('uploadContent').innerHTML = `
+    <img class="upload-preview-img" src="${url}" alt="Your photo">
+    <div class="upload-btn-row">
+      <button class="upload-change-btn" onclick="event.stopPropagation();document.getElementById('photoInput').click()">Change Picture</button>
+      <button class="upload-remove-btn" onclick="event.stopPropagation();removePhoto()">Remove</button>
+    </div>`;
+}
+
+function removePhoto() {
+  photoUrl = null;
+  const area = document.getElementById('uploadArea');
+  area.classList.remove('ready');
+  document.getElementById('uploadContent').innerHTML = `
+    <div class="upload-icon">📸</div>
+    <div class="upload-hint">Tap to upload your photo</div>`;
+  document.getElementById('photoInput').value = '';
+}
 
 // ── RENDER CARD ───────────────────────────────────────────────────────────────
 function renderCard(){
@@ -1038,17 +1070,22 @@ function renderCard(){
 // ── CAPTURE ───────────────────────────────────────────────────────────────────
 async function capture(scale=3){
   const card=document.getElementById('idCard');
-  const cl=card.cloneNode(true);
-  cl.style.cssText=`position:fixed;top:0;left:0;z-index:-9999;width:${card.offsetWidth}px;margin:0;pointer-events:none;`;
-  document.body.appendChild(cl);
-  try{return await html2canvas(cl,{scale,useCORS:true,allowTaint:true,backgroundColor:null,logging:false,scrollX:0,scrollY:0});}
-  finally{document.body.removeChild(cl);}
+  return await html2canvas(card,{scale,useCORS:true,allowTaint:true,backgroundColor:null,logging:false,scrollX:0,scrollY:0,x:0,y:0,width:card.offsetWidth,height:card.offsetHeight});
 }
 
 document.getElementById('btnDl').addEventListener('click',async()=>{
   const b=document.getElementById('btnDl');b.textContent='Generating…';b.disabled=true;
-  try{const c=await capture(4);const a=document.createElement('a');a.download=`wc2026-${(COUNTRY_SURNAMES[selKey]?.country||'fancard').toLowerCase().replace(/[\s']/g,'-')}.png`;a.href=c.toDataURL('image/png');a.click();}
-  catch{toast('Download failed — try again');}finally{b.innerHTML='⬇ Download';b.disabled=false;}
+  try{
+    const c=await capture(4);
+    c.toBlob(blob=>{
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;a.download=`wc2026-${(COUNTRY_SURNAMES[selKey]?.country||'fancard').toLowerCase().replace(/[\s']/g,'-')}.png`;
+      document.body.appendChild(a);a.click();document.body.removeChild(a);
+      setTimeout(()=>URL.revokeObjectURL(url),1000);
+      b.innerHTML='⬇ Download';b.disabled=false;
+    },'image/png');
+  }catch(e){console.error(e);toast('Download failed — try again');b.innerHTML='⬇ Download';b.disabled=false;}
 });
 
 document.getElementById('btnSh').addEventListener('click',async()=>{
@@ -1058,13 +1095,15 @@ document.getElementById('btnSh').addEventListener('click',async()=>{
   try{
     const c=await capture(3);
     c.toBlob(async blob=>{
-      const file=new File([blob],'wc2026-fancard.png',{type:'image/png'});
-      if(navigator.share&&navigator.canShare({files:[file]}))await navigator.share({text:txt,files:[file]});
-      else if(navigator.share)await navigator.share({text:txt});
-      else{await navigator.clipboard.writeText(txt);toast('Link copied!');}
+      try{
+        const file=new File([blob],'wc2026-fancard.png',{type:'image/png'});
+        if(navigator.share&&navigator.canShare({files:[file]}))await navigator.share({text:txt,files:[file]});
+        else if(navigator.share)await navigator.share({text:txt});
+        else{await navigator.clipboard.writeText(txt);toast('Link copied!');}
+      }catch(e){if(e.name!=='AbortError')toast('Share failed — try download');}
+      finally{b.innerHTML='↗ Share';b.disabled=false;}
     },'image/png');
-  }catch(e){if(e.name!=='AbortError')toast('Share failed — try download');}
-  finally{b.innerHTML='↗ Share';b.disabled=false;}
+  }catch(e){console.error(e);toast('Share failed — try download');b.innerHTML='↗ Share';b.disabled=false;}
 });
 
 // ── TOAST ─────────────────────────────────────────────────────────────────────
