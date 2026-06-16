@@ -283,7 +283,7 @@ nav{
   margin:32px auto 0;width:195px;height:195px;border-radius:50%;
   background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;
   font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;
-  color:rgba(255,255,255,.5);position:relative;overflow:hidden;flex-shrink:0;
+  color:rgba(255,255,255,.5);position:relative;overflow:visible;flex-shrink:0;
 }
 .sc-photo img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
 .sc-ring{position:absolute;inset:-5px;border-radius:50%;border:3px solid var(--sca,#f5c518);box-shadow:0 0 28px color-mix(in srgb,var(--sca,#f5c518) 55%,transparent)}
@@ -527,7 +527,7 @@ footer{padding:36px 28px;display:flex;align-items:center;justify-content:space-b
 .card-scrim{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.06) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,.55) 65%,rgba(0,0,0,.93) 100%)}
 .card-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center}
 .card-photo-area{margin-top:32px;position:relative;width:195px;height:195px}
-.card-ring{display:none}
+.card-ring{position:absolute;inset:-5px;border-radius:50%;border:4px solid var(--ca,#f5c518);box-shadow:0 0 28px rgba(245,197,24,.5);pointer-events:none;z-index:2;transition:border-color .4s,box-shadow .4s}
 .card-photo-img{width:195px;height:195px;border-radius:50%;object-fit:cover;display:block}
 .card-photo-ph{width:195px;height:195px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:4rem;color:rgba(255,255,255,.25)}
 .card-info{position:absolute;bottom:0;left:0;right:0;padding:0 18px 18px;text-align:center}
@@ -762,7 +762,7 @@ footer{padding:36px 28px;display:flex;align-items:center;justify-content:space-b
             <div class="card-content">
               <div class="card-empty" id="cardEmpty"><div class="e-icon">🌍</div><p>Building<br>your card…</p></div>
               <div class="card-photo-area" id="cardPhotoArea" style="display:none">
-                <div class="card-ring"></div>
+                <div class="card-ring" id="cardRing"></div>
                 <img class="card-photo-img" id="cardPhotoImg" src="" alt="" style="display:none">
                 <div class="card-photo-ph" id="cardPhotoPh">👤</div>
               </div>
@@ -989,21 +989,21 @@ loadMatches();
 
 // ── SLIDESHOW ─────────────────────────────────────────────────────────────────
 const SLIDES=[
-  {key:'ghana',      name:'Antoine',   sn:'Semenyo',   handle:'@semenyo_gh',  bg:BGRND.ghana,       photo:'backgrounds/images/semenyo.jpg'},
-  {key:'france',     name:'Kylian',    sn:'Mbappé',    handle:'@mbappe',      bg:BGRND.france,      photo:'backgrounds/images/Kylian Mbappe.png'},
-  {key:'norway',     name:'Erling',    sn:'Haaland',   handle:'@erling9',     bg:BGRND.norway,      photo:'backgrounds/images/haaland.jpg'},
-  {key:'brazil',     name:'Vinicius',  sn:'Jr.',       handle:'@vinijr',      bg:BGRND.brazil,      photo:'backgrounds/images/vinicius.jpg'},
-  {key:'argentina',  name:'Lionel',    sn:'Messi',     handle:'@leomessi',    bg:BGRND.argentina,   photo:'backgrounds/images/messi.webp'},
-  {key:'england',    name:'Jude',      sn:'Bellingham',handle:'@judebellingham',bg:BGRND.england,    photo:'backgrounds/images/jude bellingham.jpg'},
-  {key:'germany',    name:'Kai',       sn:'Havertz',   handle:'@kaihavertz',  bg:BGRND.germany,     photo:'backgrounds/images/Kai havertz.webp'},
-  {key:'spain',      name:'Lamine',    sn:'Yamal',     handle:'@lamineyamal', bg:BGRND.spain,       photo:'backgrounds/images/lamine yamal.jpg'},
-  {key:'croatia',    name:'Luka',      sn:'Modrić',    handle:'@lukamodric10',bg:BGRND.croatia,     photo:'backgrounds/images/modric.jpg'},
-  {key:'portugal',   name:'Cristiano', sn:'Ronaldo',   handle:'@cr7',         bg:BGRND.portugal,    photo:'backgrounds/images/christiano ronaldo.webp'},
-  {key:'usa',        name:'Christian', sn:'Pulisic',   handle:'@cpulisic10',  bg:BGRND.usa,         photo:'backgrounds/images/pulisic.webp'},
-  {key:'senegal',    name:'Sadio',     sn:'Mané',      handle:'@sadiomane',   bg:BGRND.senegal,     photo:'backgrounds/images/sadio mane.webp'},
-  {key:'south_korea',name:'Heung-Min', sn:'Son',       handle:'@hm_son',      bg:BGRND.south_korea, photo:'backgrounds/images/heung min son.jpg'},
-  {key:'morocco',    name:'Achraf',    sn:'Hakimi',    handle:'@achraf_hakimi',bg:BGRND.morocco,    photo:'backgrounds/images/Hakimi.webp'},
-  {key:'netherlands',name:'Virgil',    sn:'van Dijk',  handle:'@virgilvandijk',bg:BGRND.netherlands,photo:'backgrounds/images/van dyk.webp'},
+  {key:'ghana',      name:'Kwame',     sn:'Boateng',   handle:'@kwameb',       bg:BGRND.ghana,       photo:'backgrounds/images/fans/ghana.png'},
+  {key:'france',     name:'Camille',   sn:'Laurent',   handle:'@camillelaurent',bg:BGRND.france,     photo:'backgrounds/images/fans/france.png'},
+  {key:'norway',     name:'Lars',      sn:'Eriksen',   handle:'@larseriksen',  bg:BGRND.norway,      photo:'backgrounds/images/fans/norway.png'},
+  {key:'brazil',     name:'Ana',       sn:'Silva',     handle:'@anasilva',     bg:BGRND.brazil,      photo:'backgrounds/images/fans/brazil.png'},
+  {key:'argentina',  name:'Mateo',     sn:'Fernández', handle:'@mateof',       bg:BGRND.argentina,   photo:'backgrounds/images/fans/argentina.png'},
+  {key:'england',    name:'James',     sn:'Whitfield', handle:'@jameswhit',    bg:BGRND.england,     photo:'backgrounds/images/fans/england.png'},
+  {key:'germany',    name:'Lena',      sn:'Fischer',   handle:'@lenafischer',  bg:BGRND.germany,     photo:'backgrounds/images/fans/germany.png'},
+  {key:'spain',      name:'Diego',     sn:'Morales',   handle:'@diegomorales',bg:BGRND.spain,       photo:'backgrounds/images/fans/spain.png'},
+  {key:'croatia',    name:'Ivana',     sn:'Horvat',    handle:'@ivanahorvat',  bg:BGRND.croatia,     photo:'backgrounds/images/fans/croatia.png'},
+  {key:'portugal',   name:'Tiago',     sn:'Santos',    handle:'@tiagosantos',  bg:BGRND.portugal,    photo:'backgrounds/images/fans/portugal.png'},
+  {key:'usa',        name:'Madison',   sn:'Carter',    handle:'@madisoncarter',bg:BGRND.usa,         photo:'backgrounds/images/fans/usa.png'},
+  {key:'senegal',    name:'Moussa',    sn:'Diop',      handle:'@moussadiop',   bg:BGRND.senegal,     photo:'backgrounds/images/fans/senegal.png'},
+  {key:'south_korea',name:'Ji-woo',    sn:'Park',      handle:'@jiwoopark',    bg:BGRND.south_korea, photo:'backgrounds/images/fans/south_korea.png'},
+  {key:'morocco',    name:'Youssef',   sn:'El Amrani', handle:'@youssefea',    bg:BGRND.morocco,     photo:'backgrounds/images/fans/morocco.png'},
+  {key:'netherlands',name:'Sanne',     sn:'de Vries',  handle:'@sannedevries',bg:BGRND.netherlands, photo:'backgrounds/images/fans/netherlands.png'},
 ];
 let slideIdx=0,slideTimer;
 
@@ -1220,9 +1220,7 @@ function renderCard(){
   const accent=getAccent(selKey);
   card.style.setProperty('--ca',accent);
   card.style.boxShadow=`0 0 0 1px rgba(255,255,255,.06),0 24px 60px rgba(0,0,0,.8),0 0 40px rgba(${hexRgb(accent)},.15)`;
-  const ringStyle=`0 0 0 4px ${accent}, 0 0 28px rgba(${hexRgb(accent)},.6)`;
-  document.getElementById('cardPhotoImg').style.boxShadow=ringStyle;
-  document.getElementById('cardPhotoPh').style.boxShadow=ringStyle;
+  document.getElementById('cardRing').style.boxShadow=`0 0 28px rgba(${hexRgb(accent)},.5)`;
   if(BGRND[selKey]){bg.style.backgroundImage=`url("${BGRND[selKey]}")`;bg.style.backgroundSize='cover';}
   else{const c=data.colors;bg.style.backgroundImage=`linear-gradient(155deg,${c.primary} 0%,${darken(c.primary,55)} 45%,#080808 100%)`;}
 
@@ -1258,18 +1256,18 @@ async function captureCard(scale=6){
   document.body.appendChild(clone);
 
   // Inline all accent-dependent styles (html2canvas doesn't resolve CSS vars reliably)
-  const ringStyle=`0 0 0 4px ${accent}, 0 0 28px rgba(${rgb},.6)`;
   clone.querySelectorAll('.card-country').forEach(el=>el.style.color=accent);
   clone.querySelectorAll('.card-badge-pill').forEach(el=>{el.style.color=accent;el.style.borderColor=accent;});
   clone.querySelectorAll('.card-handle').forEach(el=>el.style.color=accent);
-  clone.querySelectorAll('.card-photo-ph').forEach(el=>el.style.boxShadow=ringStyle);
+  // box-shadow is unreliable in html2canvas — use a real border for the ring stroke
+  clone.querySelectorAll('.card-ring').forEach(el=>{el.style.borderColor=accent;el.style.boxShadow='none';});
 
   // html2canvas ignores object-fit:cover on <img> — replace with background-image div
   // Read dimensions AFTER appending so media queries are active
   clone.querySelectorAll('.card-photo-img').forEach(img=>{
     const w=img.offsetWidth, h=img.offsetHeight;
     const div=document.createElement('div');
-    div.style.cssText=`width:${w}px;height:${h}px;border-radius:50%;background:url("${img.src}") center/cover no-repeat;display:block;box-shadow:${ringStyle}`;
+    div.style.cssText=`width:${w}px;height:${h}px;border-radius:50%;background:url("${img.src}") center/cover no-repeat;display:block;`;
     img.parentNode.replaceChild(div,img);
   });
 
