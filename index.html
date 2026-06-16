@@ -6,7 +6,7 @@
 <title>WC2026 FanCard — Get Your Official FIFA World Cup 2026 Fan Card</title>
 <meta name="description" content="Generate your official FIFA World Cup 2026 fan card. Pick your country, upload your photo, and share your support with the world.">
 <meta property="og:title" content="WC2026 FanCard — Rep Your Nation">
-<meta property="og:description" content="Get your official FIFA World Cup 2026 fan card. 32 nations. Your photo. Your name. Share it everywhere.">
+<meta property="og:description" content="Get your official FIFA World Cup 2026 fan card. 48 nations. Your photo. Your name. Share it everywhere.">
 <meta name="theme-color" content="#080808">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,7 +49,7 @@ nav{
   padding:18px 28px;
   background:rgba(8,8,8,0.96);
   backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--border);
+  border-bottom:1px dashed var(--border2);
   position:sticky;top:3px;z-index:100;
 }
 .nav-logo{
@@ -112,15 +112,9 @@ nav{
 /* ─── HERO ── */
 .hero{
   display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
-  padding:72px 0 0;position:relative;overflow:hidden;text-align:center;
+  padding:0 0 0;position:relative;overflow:hidden;
   user-select:none;
-}
-.hero::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 70% 40% at 50% 0%,var(--accent-dim) 0%,transparent 70%),
-    radial-gradient(ellipse 40% 30% at 10% 80%,rgba(245,197,24,.03) 0%,transparent 60%);
-  transition:background .6s;
+  border-bottom:1px dashed var(--border2);
 }
 .hero::after{
   content:'';position:absolute;inset:0;pointer-events:none;
@@ -129,29 +123,68 @@ nav{
     linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);
   background-size:56px 56px;
 }
-.hero-inner{position:relative;z-index:1;max-width:720px;width:100%;padding:0 32px;margin-bottom:56px}
+.hero-top{
+  position:relative;z-index:1;width:100%;max-width:1100px;margin:0 auto;
+  padding:88px 32px 64px;
+  display:flex;align-items:center;gap:56px;
+}
+.hero-text{flex:1;min-width:0;max-width:520px;text-align:left}
+.hero-visual{flex:1;min-width:0;position:relative;display:flex;align-items:center;justify-content:center;min-height:480px}
 
 .hero-eyebrow{
-  display:inline-flex;align-items:center;gap:7px;
+  display:inline-flex;align-items:center;gap:8px;
   font-family:'Barlow Condensed',sans-serif;font-size:.66rem;font-weight:700;
-  letter-spacing:.22em;text-transform:uppercase;
-  padding:6px 14px;border:1px solid var(--accent-border);border-radius:20px;
-  color:var(--accent);margin-bottom:28px;
-  transition:color .4s,border-color .4s;
+  letter-spacing:.16em;text-transform:uppercase;
+  padding:5px 8px 5px 14px;border:1px solid var(--border2);border-radius:30px;
+  color:var(--text);margin-bottom:28px;
+  transition:border-color .4s;
 }
-.eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite;transition:background .4s}
+.eyebrow-new{
+  background:var(--accent-dim);color:var(--accent);font-weight:800;
+  border-radius:8px;padding:3px 9px;font-size:.6rem;letter-spacing:.1em;
+  transition:background .4s,color .4s;
+}
+.eyebrow-divider{width:1px;height:14px;background:var(--border2)}
+.eyebrow-arrow{color:var(--muted);font-size:.85rem;line-height:1}
 
 .hero h1{
   font-family:'Barlow Condensed',sans-serif;font-weight:900;
-  font-size:clamp(3.2rem,10vw,6.5rem);line-height:.92;
-  text-transform:uppercase;letter-spacing:-.01em;margin-bottom:22px;
+  font-size:clamp(2.6rem,5.4vw,4.2rem);line-height:.98;
+  text-transform:uppercase;letter-spacing:-.01em;margin-bottom:20px;
 }
-.hero h1 em{font-style:italic;color:var(--accent);transition:color .4s;display:block}
+.hero h1 em{font-style:italic;color:var(--accent);transition:color .4s}
 
 .hero-sub{
-  font-size:1rem;line-height:1.7;
-  color:var(--muted);max-width:440px;margin:0 auto 40px;
+  font-size:1.02rem;line-height:1.7;
+  color:var(--muted);max-width:440px;margin:0 0 36px;
 }
+
+/* pill capture form, tailark-style */
+.hero-form{
+  display:grid;grid-template-columns:1fr auto;align-items:center;
+  background:var(--bg3);border:1px solid var(--border2);border-radius:16px;
+  padding:5px;margin-bottom:28px;max-width:420px;
+  transition:box-shadow .2s,border-color .2s;
+  position:relative;
+}
+.hero-form:focus-within{border-color:var(--accent-border);box-shadow:0 0 0 3px var(--accent-dim)}
+.hero-form-icon{
+  position:absolute;left:18px;top:50%;transform:translateY(-50%);
+  color:var(--muted);pointer-events:none;font-size:1rem;
+}
+.hero-form input{
+  height:54px;width:100%;background:transparent;border:none;outline:none;
+  padding:0 16px 0 44px;color:var(--text);font-family:'Barlow',sans-serif;font-size:.95rem;
+}
+.hero-form input::placeholder{color:var(--muted)}
+
+.hero-list{
+  list-style:none;display:flex;gap:20px;flex-wrap:wrap;
+  font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+}
+.hero-list li{display:flex;align-items:center;gap:7px}
+.hero-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);transition:background .4s}
 
 /* Rainbow glow button — no wrapper, no pseudo-elements, no pointer-event traps */
 @keyframes rainbowGlow{
@@ -176,8 +209,50 @@ nav{
 .hero-cta-btn:hover{background:#111;transform:translateY(-1px)}
 .hero-cta-btn:active{transform:translateY(0)}
 
+.hero-form-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.85rem;
+  letter-spacing:0.06em;text-transform:uppercase;
+  padding:0 22px;height:44px;background:#000;color:#fff;
+  border:none;border-radius:12px;cursor:pointer;
+  animation:rainbowGlow 3s linear infinite;
+  transition:background .2s,transform .15s;
+}
+.hero-form-btn:hover{background:#111;transform:translateY(-1px)}
+.hero-form-btn:active{transform:translateY(0)}
+
+/* ─── FANNED CARD DECK (hero visual, real card data) ── */
+.hero-deck{position:relative;width:100%;height:480px}
+.deck-card{
+  position:absolute;top:50%;left:50%;
+  width:260px;height:390px;border-radius:20px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:0 30px 70px rgba(0,0,0,.6);
+  transition:transform .5s cubic-bezier(.4,0,.2,1),opacity .4s;
+}
+.deck-card.d1{transform:translate(-50%,-50%) translateX(-92px) rotate(-9deg) scale(.88);z-index:1;filter:brightness(.6)}
+.deck-card.d2{transform:translate(-50%,-50%) translateX(0) rotate(0deg) scale(1);z-index:3}
+.deck-card.d3{transform:translate(-50%,-50%) translateX(92px) rotate(9deg) scale(.88);z-index:2;filter:brightness(.6)}
+.deck-card .sc-photo{margin-top:26px;width:165px;height:165px}
+.deck-card .sc-fn,.deck-card .sc-sn{font-size:1.5rem}
+.deck-card.d2.pop{animation:deckPop .45s cubic-bezier(.4,0,.2,1)}
+@keyframes deckPop{0%{transform:translate(-50%,-50%) scale(.93);opacity:.5}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
+
 /* ─── SLIDESHOW (inside hero) ── */
 .hero-slideshow{position:relative;z-index:1;width:100%;margin-top:40px;padding-bottom:48px}
+/* Desktop: fanned deck in hero, carousel hidden. Mobile: carousel shown, deck hidden. */
+@media(min-width:901px){
+  .hero-slideshow{display:none}
+}
+@media(max-width:900px){
+  .hero-top{flex-direction:column;padding:56px 24px 40px;gap:40px;text-align:center}
+  .hero-text{text-align:center;max-width:100%}
+  .hero-eyebrow{margin-left:auto;margin-right:auto}
+  .hero-sub{margin:0 auto 32px}
+  .hero-form{margin:0 auto 24px}
+  .hero-list{justify-content:center}
+  .hero-visual{display:none}
+}
 @media(max-width:640px){
   .stats-section{order:3}
   .hero-slideshow{order:2}
@@ -508,14 +583,37 @@ footer{padding:36px 28px;display:flex;align-items:center;justify-content:space-b
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-eyebrow">
-      <span class="eyebrow-dot"></span>
-      Official Fan Card Generator · 32 Nations
+  <div class="hero-top">
+    <div class="hero-text">
+      <a href="#picker" class="hero-eyebrow">
+        <span class="eyebrow-new">New</span>
+        48-Nation World Cup Fan Cards
+        <span class="eyebrow-divider"></span>
+        <span class="eyebrow-arrow">→</span>
+      </a>
+      <h1>Rep Your <em>Nation.</em></h1>
+      <p class="hero-sub">Pick your country, upload your photo, and get your official FIFA World Cup 2026 fan card. Share it with the world.</p>
+
+      <form class="hero-form" id="heroNameForm">
+        <span class="hero-form-icon">👤</span>
+        <input type="text" id="heroNameInput" placeholder="Enter your name">
+        <button type="submit" class="hero-form-btn" id="heroCtaBtn">Get Started</button>
+      </form>
+
+      <ul class="hero-list">
+        <li>Free</li>
+        <li>Instant</li>
+        <li>Shareable</li>
+      </ul>
     </div>
-    <h1>Rep Your<br><em>Nation.</em></h1>
-    <p class="hero-sub">Pick your country, upload your photo, and get your official FIFA World Cup 2026 fan card. Share it with the world.</p>
-    <button class="hero-cta-btn" id="heroCtaBtn">⚡ Get Your Fan Card</button>
+
+    <div class="hero-visual">
+      <div class="hero-deck">
+        <div class="deck-card d1" id="deckCard1"></div>
+        <div class="deck-card d2" id="deckCard2"></div>
+        <div class="deck-card d3" id="deckCard3"></div>
+      </div>
+    </div>
   </div>
   <!-- STATS inside hero, above slideshow -->
   <div class="stats-section">
@@ -526,7 +624,7 @@ footer{padding:36px 28px;display:flex;align-items:center;justify-content:space-b
       </div>
       <div class="stat-div"></div>
       <div class="stat-item">
-        <div class="stat-num">32</div>
+        <div class="stat-num">48</div>
         <div class="stat-label">Nations</div>
       </div>
       <div class="stat-div"></div>
@@ -556,7 +654,7 @@ footer{padding:36px 28px;display:flex;align-items:center;justify-content:space-b
       <div class="step-num-big">01</div>
       <div class="step-icon">🌍</div>
       <div class="step-name">Pick Your Nation</div>
-      <p class="step-desc">Choose from all 32 FIFA World Cup 2026 nations. Your card colors adapt to your country.</p>
+      <p class="step-desc">Choose from all 48 FIFA World Cup 2026 nations. Your card colors adapt to your country.</p>
     </div>
     <div class="step-card">
       <div class="step-num-big">02</div>
@@ -909,20 +1007,14 @@ const SLIDES=[
 ];
 let slideIdx=0,slideTimer;
 
-function buildSlideshow(){
-  const track=document.getElementById('cardsTrack');
-  const dots=document.getElementById('slideDots');
-  track.innerHTML=''; dots.innerHTML='';
-  SLIDES.forEach((d,i)=>{
-    const acc=getAccent(d.key);
-    const cdata=COUNTRY_SURNAMES[d.key];
-    const c=cdata?.colors;
-    const bgStyle=d.bg
-      ?`background-image:url('${d.bg}')`
-      :`background-image:linear-gradient(155deg,${c?.primary||'#222'} 0%,${darken(c?.primary||'#222',55)} 45%,#080808 100%)`;
-    const code=CODES[d.key]||'???';
-    track.innerHTML+=`<div class="slide-card" style="--sca:${acc}">
-      <div class="sc-bg" style="${bgStyle};background-size:cover;background-position:center"></div>
+function slideCardInner(d){
+  const cdata=COUNTRY_SURNAMES[d.key];
+  const c=cdata?.colors;
+  const bgStyle=d.bg
+    ?`background-image:url('${d.bg}')`
+    :`background-image:linear-gradient(155deg,${c?.primary||'#222'} 0%,${darken(c?.primary||'#222',55)} 45%,#080808 100%)`;
+  const code=CODES[d.key]||'???';
+  return `<div class="sc-bg" style="${bgStyle};background-size:cover;background-position:center"></div>
       <div class="sc-scrim"></div>
       <div class="sc-body">
         <div class="sc-photo"><div class="sc-ring"></div>${d.photo?`<img src="${d.photo}" alt="">`:`<span>${code}</span>`}</div>
@@ -934,8 +1026,16 @@ function buildSlideshow(){
           <div class="sc-badge">Official Fan</div>
           <div class="sc-country">${cdata?.country?.toUpperCase()||''}</div>
         </div>
-      </div>
-    </div>`;
+      </div>`;
+}
+
+function buildSlideshow(){
+  const track=document.getElementById('cardsTrack');
+  const dots=document.getElementById('slideDots');
+  track.innerHTML=''; dots.innerHTML='';
+  SLIDES.forEach((d,i)=>{
+    const acc=getAccent(d.key);
+    track.innerHTML+=`<div class="slide-card" style="--sca:${acc}">${slideCardInner(d)}</div>`;
     const dot=document.createElement('div');
     dot.className='sdot'+(i===0?' active':'');
     dot.onclick=()=>goSlide(i);
@@ -972,6 +1072,30 @@ slideTimer=setInterval(autoSlide,3200);
     }
   },{passive:true});
 })();
+
+// ── HERO DECK (desktop fanned auto-rotate, real card data) ───────────────────
+let heroDeckIdx=0,heroDeckTimer;
+function buildHeroDeck(){
+  const n=SLIDES.length;
+  const prev=SLIDES[(heroDeckIdx-1+n)%n];
+  const cur=SLIDES[heroDeckIdx%n];
+  const next=SLIDES[(heroDeckIdx+1)%n];
+  const d1=document.getElementById('deckCard1');
+  const d2=document.getElementById('deckCard2');
+  const d3=document.getElementById('deckCard3');
+  if(!d1||!d2||!d3) return;
+  d1.style.setProperty('--sca',getAccent(prev.key));
+  d2.style.setProperty('--sca',getAccent(cur.key));
+  d3.style.setProperty('--sca',getAccent(next.key));
+  d1.innerHTML=slideCardInner(prev);
+  d2.innerHTML=slideCardInner(cur);
+  d3.innerHTML=slideCardInner(next);
+  d2.classList.remove('pop');
+  requestAnimationFrame(()=>d2.classList.add('pop'));
+}
+function autoHeroDeck(){heroDeckIdx=(heroDeckIdx+1)%SLIDES.length;buildHeroDeck();}
+buildHeroDeck();
+heroDeckTimer=setInterval(autoHeroDeck,3200);
 
 // ── OVERLAY (matches Mexican project pattern exactly) ─────────────────────────
 const genOverlay = document.getElementById('genOverlay');
@@ -1267,9 +1391,15 @@ let tt;
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),3000);}
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
-document.getElementById('heroCtaBtn').addEventListener('click', function(e) {
+document.getElementById('heroNameForm').addEventListener('submit', function(e) {
   e.preventDefault();
   e.stopPropagation();
+  const val=document.getElementById('heroNameInput').value.trim();
+  if(val){
+    const parts=val.split(/\s+/);
+    document.getElementById('fFN').value=parts[0]||'';
+    document.getElementById('fSN').value=parts.slice(1).join(' ')||'';
+  }
   openModal();
 });
 buildGrid();
